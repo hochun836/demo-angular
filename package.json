@@ -7,7 +7,10 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build-sit": "ng build --configuration=sit --outputPath=dist/sit --baseHref=/demo-angular/",
+    "build-uat": "ng build --configuration=uat --outputPath=dist/uat --baseHref=/demo-angular/",
+    "build-prd": "ng build --prod --outputPath=dist/prd --baseHref=/demo-angular/"
   },
   "private": true,
   "dependencies": {

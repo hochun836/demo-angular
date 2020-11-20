@@ -1,4 +1,4 @@
 export const environment = {
-  ENV_NAME: 'PRD',
+  ENV_NAME: 'UAT',
   production: true
 };

@@ -1,3 +1,5 @@
+<div class="env-name">{{ ENV_NAME }}</div>
+
 <h1>{{ title }}</h1>
 
 <button routerLink="/login">登入頁面</button> | 
@@ -6,3 +8,12 @@
 <hr>
 
 <router-outlet></router-outlet>
+
+<style>
+  .env-name {
+    position: absolute;
+    background-color: coral;
+    top: 15px;
+    right: 15px;
+  }
+</style>
