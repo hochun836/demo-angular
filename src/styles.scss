@@ -10,3 +10,9 @@ h1 {
   font-weight: bold;
   border-radius: 10px;
 }
+
+button:focus {
+  // override chrome
+  // outline: -webkit-focus-ring-color auto 1px;
+  outline: inherit;
+}
