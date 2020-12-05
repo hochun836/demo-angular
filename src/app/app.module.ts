@@ -9,6 +9,8 @@ import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { MainComponent } from './main/main.component';
 import { GoogleMapComponent } from './google-map/google-map.component';
+import { YoutubeComponent } from './youtube/youtube.component';
+import { YouTubePlayerModule } from '@angular/youtube-player';
 
 @NgModule({
   declarations: [
@@ -16,12 +18,14 @@ import { GoogleMapComponent } from './google-map/google-map.component';
     LoginComponent,
     PageNotFoundComponent,
     MainComponent,
-    GoogleMapComponent
+    GoogleMapComponent,
+    YoutubeComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     GoogleMapsModule,
+    YouTubePlayerModule,
     AppRoutingModule,
   ],
   providers: [],
