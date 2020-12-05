@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AngularMaterialComponent } from './angular-material/angular-material.component';
 import { GoogleMapComponent } from './google-map/google-map.component';
 import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'google-map', component: GoogleMapComponent },
   { path: 'youtube', component: YoutubeComponent },
+  { path: 'angular-material', component: AngularMaterialComponent },
   { path: '', redirectTo: 'main', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 ];

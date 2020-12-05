@@ -11,6 +11,8 @@ import { MainComponent } from './main/main.component';
 import { GoogleMapComponent } from './google-map/google-map.component';
 import { YoutubeComponent } from './youtube/youtube.component';
 import { YouTubePlayerModule } from '@angular/youtube-player';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularMaterialComponent } from './angular-material/angular-material.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,8 @@ import { YouTubePlayerModule } from '@angular/youtube-player';
     PageNotFoundComponent,
     MainComponent,
     GoogleMapComponent,
-    YoutubeComponent
+    YoutubeComponent,
+    AngularMaterialComponent
   ],
   imports: [
     BrowserModule,
@@ -27,6 +30,7 @@ import { YouTubePlayerModule } from '@angular/youtube-player';
     GoogleMapsModule,
     YouTubePlayerModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
