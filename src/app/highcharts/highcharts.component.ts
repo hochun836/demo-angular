@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as Highcharts from 'highcharts';
 import { AppComponent } from '../app.component';
-import { option1 } from './data';
+import options from './options';
 
 declare var require: any;
 let Boost = require('highcharts/modules/boost');
@@ -21,15 +21,19 @@ Export(Highcharts);
 })
 export class HighchartsComponent implements OnInit {
 
+  exampleNo = 0;
+
   constructor(
     private appComponent: AppComponent,
   ) { }
 
   ngOnInit() {
-    // Highcharts.chart('container1', option1);
-    this.appComponent.zone.runOutsideAngular(() => {
-      Highcharts.chart('container1', option1);
-    });
   }
 
+  doClick(i: number) {
+    // Highcharts.chart('container', options[i]);
+    this.appComponent.zone.runOutsideAngular(() => {
+      Highcharts.chart('container', options[i]);
+    });
+  }
 }
