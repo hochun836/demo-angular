@@ -23,6 +23,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { CdkComponent } from './cdk/cdk.component';
 import { CdkDemo1Component } from './cdk/cdk-demo1.component';
 import { FormsModule } from '@angular/forms';
+import { CdkDemo2Component } from './cdk/cdk-demo2.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { FormsModule } from '@angular/forms';
     HighchartsComponent,
     DashboardComponent,
     CdkComponent,
-    CdkDemo1Component
+    CdkDemo1Component,
+    CdkDemo2Component
   ],
   imports: [
     BrowserModule,
