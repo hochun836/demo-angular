@@ -1,5 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 
+////////////////////////////////////////////
+///////////// angular-material /////////////
+////////////////////////////////////////////
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+////////////////////////////////////////////
+////////////////// custom //////////////////
+////////////////////////////////////////////
 h1 {
   color: blue;
 }
@@ -16,5 +25,3 @@ button:focus {
   // outline: -webkit-focus-ring-color auto 1px;
   outline: inherit;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

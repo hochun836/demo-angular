@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { OverlayContainer } from '@angular/cdk/overlay';
+import { Query } from '@angular/compiler/src/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-angular-material',
@@ -7,9 +9,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AngularMaterialComponent implements OnInit {
 
-  constructor() { }
+  @ViewChild('container', { static: true }) container: ElementRef<HTMLDivElement>;
+
+  theme = 'custom-theme-1';
+
+  constructor(
+    private overlayContainer: OverlayContainer
+  ) { }
 
   ngOnInit(): void {
+    this.container.nativeElement.classList.add(this.theme);
+    this.overlayContainer.getContainerElement().classList.add(this.theme);
   }
 
+  toggleTheme() {
+    const originalTheme = this.theme;
+    this.theme = this.theme === 'custom-theme-1' ? 'custom-theme-2' : 'custom-theme-1';
+    this.container.nativeElement.classList.remove(originalTheme);
+    this.container.nativeElement.classList.add(this.theme);
+    this.overlayContainer.getContainerElement().classList.remove(originalTheme);
+    this.overlayContainer.getContainerElement().classList.add(this.theme);
+  }
 }
