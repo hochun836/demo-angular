@@ -20,6 +20,9 @@ import { ProfileComponent } from './member/profile.component';
 import { SettingComponent } from './member/setting.component';
 import { HighchartsComponent } from './highcharts/highcharts.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { CdkComponent } from './cdk/cdk.component';
+import { CdkDemo1Component } from './cdk/cdk-demo1.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     ProfileComponent,
     SettingComponent,
     HighchartsComponent,
-    DashboardComponent
+    DashboardComponent,
+    CdkComponent,
+    CdkDemo1Component
   ],
   imports: [
     BrowserModule,
@@ -45,6 +50,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedMaterialModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

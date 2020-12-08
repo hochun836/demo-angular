@@ -13,6 +13,11 @@ export class AngularMaterialComponent implements OnInit {
 
   theme = 'custom-theme-1';
 
+  checked = false;
+  indeterminate = false;
+  labelPosition: 'before' | 'after' = 'after';
+  disabled = false;
+
   constructor(
     private overlayContainer: OverlayContainer
   ) { }

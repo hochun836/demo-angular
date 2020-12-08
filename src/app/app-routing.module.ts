@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AngularMaterialComponent } from './angular-material/angular-material.component';
+import { CdkComponent } from './cdk/cdk.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { GoogleMapComponent } from './google-map/google-map.component';
 import { HighchartsComponent } from './highcharts/highcharts.component';
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'google-map', component: GoogleMapComponent, data: { breadcrumb: 'Google Map' } },
   { path: 'youtube', component: YoutubeComponent, data: { breadcrumb: 'Youtube' } },
   { path: 'angular-material', component: AngularMaterialComponent, data: { breadcrumb: 'Angular Material' } },
+  { path: 'cdk', component: CdkComponent, data: { breadcrumb: 'Cdk' } },
   { path: 'member', component: MemberComponent, data: { breadcrumb: '會員中心' }, children: [
     { path: 'register', component: RegisterComponent, data: { breadcrumb: '註冊' } },
     { path: 'profile', component: ProfileComponent, data: { breadcrumb: '個人頁面' } },

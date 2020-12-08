@@ -3,6 +3,7 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
+import { ObserversModule } from '@angular/cdk/observers';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CdkStepperModule } from '@angular/cdk/stepper';
 import { CdkTableModule } from '@angular/cdk/table';
@@ -88,6 +89,7 @@ import { MatTreeModule } from '@angular/material/tree';
     MatTreeModule,
     OverlayModule,
     PortalModule,
+    ObserversModule,
     ScrollingModule,
   ]
 })
