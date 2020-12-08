@@ -150,8 +150,17 @@
             "browserTarget": "demo-angular:build"
           },
           "configurations": {
+            "sit": {
+              "browserTarget": "demo-angular:build:sit"
+            },
+            "uat": {
+              "browserTarget": "demo-angular:build:uat"
+            },
             "production": {
               "browserTarget": "demo-angular:build:production"
+            },
+            "heroku": {
+              "browserTarget": "demo-angular:build:heroku"
             }
           }
         },
