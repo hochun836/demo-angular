@@ -27,6 +27,9 @@ export class HighchartsComponent implements OnInit {
   ngOnInit(){
     this.zone.onUnstable.subscribe(() => { console.log('# 事件發生了') });
     this.zone.onStable.subscribe(() => { console.log('@ 事件結束了') });
-    Highcharts.chart('container1', option1);
+    // Highcharts.chart('container1', option1);
+    this.zone.runOutsideAngular(() => {
+      Highcharts.chart('container1', option1);
+    });
   }
 }
