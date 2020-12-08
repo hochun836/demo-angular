@@ -8,11 +8,13 @@ let Boost = require('highcharts/modules/boost');
 let noData = require('highcharts/modules/no-data-to-display');
 let More = require('highcharts/highcharts-more');
 let Export = require('highcharts/modules/exporting');
+let Drilldown = require('highcharts/modules/drilldown');
 
 Boost(Highcharts);
 noData(Highcharts);
 More(Highcharts);
 Export(Highcharts);
+Drilldown(Highcharts);
 
 @Component({
   selector: 'app-highcharts',

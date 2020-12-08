@@ -1,5 +1,5 @@
 import { format } from 'date-fns';
-import { data1_1, data1_2, data2_1, data2_2, data2_3, data2_4, data2_5, data3 } from './datas';
+import { data1_1, data1_2, data2_1, data2_2, data2_3, data2_4, data2_5, data3, data6_1, data6_drill_1, data6_drill_2, data6_drill_3, data6_drill_4, data6_drill_5, data6_drill_6 } from './datas';
 
 const option1: any = {
   chart: {
@@ -293,8 +293,176 @@ const option3: any = {
   }]
 };
 
+const option4: any = {
+  chart: {
+    type: 'bar'
+  },
+  title: {
+    text: '範例 4'
+  },
+  subtitle: {
+    text: 'Source: <a href="https://en.wikipedia.org/wiki/World_population">Wikipedia.org</a>'
+  },
+  xAxis: {
+    categories: ['Africa', 'America', 'Asia', 'Europe', 'Oceania'],
+    title: {
+      text: null
+    }
+  },
+  yAxis: {
+    min: 0,
+    title: {
+      text: 'Population (millions)',
+      align: 'high'
+    },
+    labels: {
+      overflow: 'justify'
+    }
+  },
+  tooltip: {
+    valueSuffix: ' millions'
+  },
+  plotOptions: {
+    bar: {
+      dataLabels: {
+        enabled: true
+      }
+    }
+  },
+  legend: {
+    layout: 'vertical',
+    align: 'right',
+    verticalAlign: 'top',
+    x: -40,
+    y: 80,
+    floating: true,
+    borderWidth: 1,
+    backgroundColor: '#FFFFFF',
+    shadow: true
+  },
+  credits: {
+    enabled: false
+  },
+  series: [{
+    name: 'Year 1800',
+    data: [107, 31, 635, 203, 2]
+  }, {
+    name: 'Year 1900',
+    data: [133, 156, 947, 408, 6]
+  }, {
+    name: 'Year 2000',
+    data: [814, 841, 3714, 727, 31]
+  }, {
+    name: 'Year 2016',
+    data: [1216, 1001, 4436, 738, 40]
+  }]
+};
+
+const option5: any = {
+  chart: {
+    type: 'bar'
+  },
+  title: {
+    text: '範例 5'
+  },
+  xAxis: {
+    categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
+  },
+  yAxis: {
+    min: 0,
+    title: {
+      text: 'Total fruit consumption'
+    }
+  },
+  legend: {
+    reversed: true
+  },
+  plotOptions: {
+    series: {
+      stacking: 'normal'
+    }
+  },
+  series: [{
+    name: 'John',
+    data: [5, 3, 4, 7, 2]
+  }, {
+    name: 'Jane',
+    data: [2, 2, 3, 2, 1]
+  }, {
+    name: 'Joe',
+    data: [3, 4, 4, 2, 5]
+  }]
+};
+
+const option6: any = {
+  chart: {
+    type: 'pie'
+  },
+  title: {
+    text: '範例 6'
+  },
+  subtitle: {
+    text: 'Click the slices to view versions. Source: <a href="http://statcounter.com" target="_blank">statcounter.com</a>'
+  },
+  accessibility: {
+    announceNewData: {
+      enabled: true
+    },
+    point: {
+      valueSuffix: '%'
+    }
+  },
+  plotOptions: {
+    series: {
+      dataLabels: {
+        enabled: true,
+        format: '{point.name}: {point.y:.1f}%'
+      }
+    }
+  },
+  tooltip: {
+    headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+    pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+  },
+  series: [{
+    name: "Browsers",
+    colorByPoint: true,
+    data: data6_1,
+  }],
+  drilldown: {
+    series: [{
+      name: "Chrome",
+      id: "Chrome",
+      data: data6_drill_1,
+    }, {
+      name: "Firefox",
+      id: "Firefox",
+      data: data6_drill_2,
+    }, {
+      name: "Internet Explorer",
+      id: "Internet Explorer",
+      data: data6_drill_3,
+    }, {
+      name: "Safari",
+      id: "Safari",
+      data: data6_drill_4,
+    }, {
+      name: "Edge",
+      id: "Edge",
+      data: data6_drill_5
+    }, {
+      name: "Opera",
+      id: "Opera",
+      data: data6_drill_6
+    }]
+  }
+};
+
 export default {
   1: option1,
   2: option2,
   3: option3,
+  4: option4,
+  5: option5,
+  6: option6,
 };
