@@ -24,6 +24,7 @@ import { CdkComponent } from './cdk/cdk.component';
 import { CdkDemo1Component } from './cdk/cdk-demo1.component';
 import { FormsModule } from '@angular/forms';
 import { CdkDemo2Component } from './cdk/cdk-demo2.component';
+import { CdkDemo3Component } from './cdk/cdk-demo3.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { CdkDemo2Component } from './cdk/cdk-demo2.component';
     DashboardComponent,
     CdkComponent,
     CdkDemo1Component,
-    CdkDemo2Component
+    CdkDemo2Component,
+    CdkDemo3Component
   ],
   imports: [
     BrowserModule,

@@ -14,7 +14,7 @@ export class CdkDemo2Component implements OnInit {
 
   ngOnInit(): void {
     this.scrollDispatcher.scrolled(1000).subscribe((scrollable: CdkScrollable) => {
-      console.log('發生scroll了，來源為：', scrollable.getElementRef().nativeElement);
+      console.log('發生 scroll 了，來源為：', scrollable ? scrollable.getElementRef().nativeElement : null);
     });
   }
 }
