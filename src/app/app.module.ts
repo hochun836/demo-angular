@@ -18,6 +18,7 @@ import { MemberComponent } from './member/member.component';
 import { RegisterComponent } from './member/register.component';
 import { ProfileComponent } from './member/profile.component';
 import { SettingComponent } from './member/setting.component';
+import { HighchartsComponent } from './highcharts/highcharts.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { SettingComponent } from './member/setting.component';
     MemberComponent,
     RegisterComponent,
     ProfileComponent,
-    SettingComponent
+    SettingComponent,
+    HighchartsComponent
   ],
   imports: [
     BrowserModule,

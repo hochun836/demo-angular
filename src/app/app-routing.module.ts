@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AngularMaterialComponent } from './angular-material/angular-material.component';
 import { GoogleMapComponent } from './google-map/google-map.component';
+import { HighchartsComponent } from './highcharts/highcharts.component';
 import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
 import { MemberComponent } from './member/member.component';
@@ -22,6 +23,7 @@ const routes: Routes = [
     { path: 'profile', component: ProfileComponent, data: { breadcrumb: '個人頁面' } },
     { path: 'setting', component: SettingComponent, data: { breadcrumb: '設定' } },
   ] },
+  { path: 'highcharts', component: HighchartsComponent, data: { breadcrumb: 'Highcharts' } },
   { path: '', redirectTo: 'main', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 ];
