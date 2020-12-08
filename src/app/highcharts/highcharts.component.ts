@@ -1,5 +1,6 @@
-import { Component, NgZone, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import * as Highcharts from 'highcharts';
+import { AppComponent } from '../app.component';
 import { option1 } from './data';
 
 declare var require: any;
@@ -21,15 +22,14 @@ Export(Highcharts);
 export class HighchartsComponent implements OnInit {
 
   constructor(
-    private zone: NgZone,
+    private appComponent: AppComponent,
   ) { }
 
-  ngOnInit(){
-    this.zone.onUnstable.subscribe(() => { console.log('# 事件發生了') });
-    this.zone.onStable.subscribe(() => { console.log('@ 事件結束了') });
+  ngOnInit() {
     // Highcharts.chart('container1', option1);
-    this.zone.runOutsideAngular(() => {
+    this.appComponent.zone.runOutsideAngular(() => {
       Highcharts.chart('container1', option1);
     });
   }
+
 }

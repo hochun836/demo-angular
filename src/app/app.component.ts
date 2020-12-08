@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
@@ -18,6 +18,7 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
+    public zone: NgZone,
   ) { }
 
   ngOnInit(): void {
@@ -30,6 +31,8 @@ export class AppComponent implements OnInit, OnDestroy {
         this.createBreadcrumbs(this.activatedRoute);
       }
     });
+    this.zone.onUnstable.subscribe(() => { console.log('##### 事件 - 發生') });
+    this.zone.onStable.subscribe(() => { console.log('##### 事件 - 結束') });
   }
 
   activate(e) {
