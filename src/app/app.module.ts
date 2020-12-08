@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { GoogleMapsModule } from '@angular/google-maps';
 
+import { SharedMaterialModule } from './shared-material.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -31,6 +32,7 @@ import { AngularMaterialComponent } from './angular-material/angular-material.co
     YouTubePlayerModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    SharedMaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
