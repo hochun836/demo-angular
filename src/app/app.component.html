@@ -3,14 +3,24 @@
 <h1>{{ title }}</h1>
 
 <button routerLink="/main" routerLinkActive="router-active">首頁</button> |
-<button routerLink="/login" routerLinkActive="router-active">登入頁面</button> | 
+<button routerLink="/login" routerLinkActive="router-active">登入頁面</button> |
 <button routerLink="/google-map" routerLinkActive="router-active">Google Map</button> |
 <button routerLink="/youtube" routerLinkActive="router-active">Youtube</button> |
 <button routerLink="/angular-material" routerLinkActive="router-active">Angular Material</button> |
+<button routerLink="/member" routerLinkActive="router-active">會員中心</button> |
 
-<hr>
+<nav>
+  <ul class="breadcrumb">
+    <ng-container *ngFor="let x of breadcrumbs; let isLast = last;">
+      <li>
+        <a [routerLink]="[x.url]" *ngIf="!isLast">{{ x.label }}</a>
+        <ng-container *ngIf="isLast">{{ x.label }}</ng-container>
+      </li>
+    </ng-container>
+  </ul>
+</nav>
 
-<router-outlet></router-outlet>
+<router-outlet (activate)="activate($event)"></router-outlet>
 
 <style>
   .env-name {

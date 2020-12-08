@@ -14,6 +14,10 @@ import { YoutubeComponent } from './youtube/youtube.component';
 import { YouTubePlayerModule } from '@angular/youtube-player';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialComponent } from './angular-material/angular-material.component';
+import { MemberComponent } from './member/member.component';
+import { RegisterComponent } from './member/register.component';
+import { ProfileComponent } from './member/profile.component';
+import { SettingComponent } from './member/setting.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +27,11 @@ import { AngularMaterialComponent } from './angular-material/angular-material.co
     MainComponent,
     GoogleMapComponent,
     YoutubeComponent,
-    AngularMaterialComponent
+    AngularMaterialComponent,
+    MemberComponent,
+    RegisterComponent,
+    ProfileComponent,
+    SettingComponent
   ],
   imports: [
     BrowserModule,
