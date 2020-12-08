@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AngularMaterialComponent } from './angular-material/angular-material.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { GoogleMapComponent } from './google-map/google-map.component';
 import { HighchartsComponent } from './highcharts/highcharts.component';
 import { LoginComponent } from './login/login.component';
@@ -24,6 +25,7 @@ const routes: Routes = [
     { path: 'setting', component: SettingComponent, data: { breadcrumb: '設定' } },
   ] },
   { path: 'highcharts', component: HighchartsComponent, data: { breadcrumb: 'Highcharts' } },
+  { path: 'dashboard', component: DashboardComponent, data: { breadcrumb: 'Dashboard' } },
   { path: '', redirectTo: 'main', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 ];

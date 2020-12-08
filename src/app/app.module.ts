@@ -19,6 +19,7 @@ import { RegisterComponent } from './member/register.component';
 import { ProfileComponent } from './member/profile.component';
 import { SettingComponent } from './member/setting.component';
 import { HighchartsComponent } from './highcharts/highcharts.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { HighchartsComponent } from './highcharts/highcharts.component';
     RegisterComponent,
     ProfileComponent,
     SettingComponent,
-    HighchartsComponent
+    HighchartsComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
