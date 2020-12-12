@@ -13,6 +13,13 @@ h1 {
   color: blue;
 }
 
+h3 {
+  &:not(:first-of-type) {
+    padding-top: 16px; 
+  }
+  color: lightskyblue;
+}
+
 button.router-active {
   background-color: #4e4e4e;
   color: #ffff00;
