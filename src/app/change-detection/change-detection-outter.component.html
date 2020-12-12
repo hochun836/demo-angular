@@ -1,0 +1,9 @@
+<p>>>> I am ChangeDetectionOutterComponent</p>
+
+<p>
+  obj: {{ obj | json }} <br>
+  name: <input [(ngModel)]="obj.name"> <br>
+  age: <input [(ngModel)]="obj.age"> <br>
+</p>
+
+<app-change-detection-inner [obj]="obj"></app-change-detection-inner>

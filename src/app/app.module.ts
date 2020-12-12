@@ -25,6 +25,9 @@ import { CdkDemo1Component } from './cdk/cdk-demo1.component';
 import { FormsModule } from '@angular/forms';
 import { CdkDemo2Component } from './cdk/cdk-demo2.component';
 import { CdkDemo3Component } from './cdk/cdk-demo3.component';
+import { ChangeDetectionComponent } from './change-detection/change-detection.component';
+import { ChangeDetectionInnerComponent } from './change-detection/change-detection-inner.component';
+import { ChangeDetectionOutterComponent } from './change-detection/change-detection-outter.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +47,10 @@ import { CdkDemo3Component } from './cdk/cdk-demo3.component';
     CdkComponent,
     CdkDemo1Component,
     CdkDemo2Component,
-    CdkDemo3Component
+    CdkDemo3Component,
+    ChangeDetectionComponent,
+    ChangeDetectionInnerComponent,
+    ChangeDetectionOutterComponent
   ],
   imports: [
     BrowserModule,

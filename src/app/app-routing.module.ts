@@ -13,6 +13,7 @@ import { RegisterComponent } from './member/register.component';
 import { SettingComponent } from './member/setting.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { YoutubeComponent } from './youtube/youtube.component';
+import { ChangeDetectionComponent } from './change-detection/change-detection.component';
 
 const routes: Routes = [
   { path: 'main', component: MainComponent, data: { breadcrumb: '首頁' } },
@@ -27,6 +28,7 @@ const routes: Routes = [
     { path: 'setting', component: SettingComponent, data: { breadcrumb: '設定' } },
   ] },
   { path: 'highcharts', component: HighchartsComponent, data: { breadcrumb: 'Highcharts' } },
+  { path: 'change-detection', component: ChangeDetectionComponent, data: { breadcrumb: '變化偵測' } },
   { path: 'dashboard', component: DashboardComponent, data: { breadcrumb: 'Dashboard' } },
   { path: '', redirectTo: 'main', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
