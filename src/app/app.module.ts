@@ -28,6 +28,7 @@ import { CdkDemo3Component } from './cdk/cdk-demo3.component';
 import { ChangeDetectionComponent } from './change-detection/change-detection.component';
 import { ChangeDetectionInnerComponent } from './change-detection/change-detection-inner.component';
 import { ChangeDetectionOutterComponent } from './change-detection/change-detection-outter.component';
+import { LifecycleComponent } from './lifecycle/lifecycle.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { ChangeDetectionOutterComponent } from './change-detection/change-detect
     CdkDemo3Component,
     ChangeDetectionComponent,
     ChangeDetectionInnerComponent,
-    ChangeDetectionOutterComponent
+    ChangeDetectionOutterComponent,
+    LifecycleComponent
   ],
   imports: [
     BrowserModule,

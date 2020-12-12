@@ -14,6 +14,7 @@ import { SettingComponent } from './member/setting.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { YoutubeComponent } from './youtube/youtube.component';
 import { ChangeDetectionComponent } from './change-detection/change-detection.component';
+import { LifecycleComponent } from './lifecycle/lifecycle.component';
 
 const routes: Routes = [
   { path: 'main', component: MainComponent, data: { breadcrumb: '首頁' } },
@@ -27,6 +28,7 @@ const routes: Routes = [
     { path: 'profile', component: ProfileComponent, data: { breadcrumb: '個人頁面' } },
     { path: 'setting', component: SettingComponent, data: { breadcrumb: '設定' } },
   ] },
+  { path: 'lifecycle', component: LifecycleComponent, data: { breadcrumb: '生命週期' } },
   { path: 'change-detection', component: ChangeDetectionComponent, data: { breadcrumb: '變化偵測' } },
   { path: 'highcharts', component: HighchartsComponent, data: { breadcrumb: 'Highcharts' } },
   { path: 'dashboard', component: DashboardComponent, data: { breadcrumb: 'Dashboard' } },
