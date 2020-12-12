@@ -33,7 +33,27 @@ export class ChangeDetectionComponent implements OnInit {
     this.appComponent.zone.runOutsideAngular(() => {
       let i = 0;
       const token = setInterval(() => {
+        //====================
         this.num = ++i;
+        //====================
+        console.log(this.num);
+        if (i == 10) {
+          clearInterval(token);
+        }
+      }, 1000);
+    });
+  }
+
+  updateNum2() {
+    debugger;
+    this.appComponent.zone.runOutsideAngular(() => {
+      let i = 0;
+      const token = setInterval(() => {
+        //====================
+        this.appComponent.zone.run(() => {
+          this.num = ++i;
+        });
+        //====================
         console.log(this.num);
         if (i == 10) {
           clearInterval(token);
