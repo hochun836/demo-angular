@@ -78,6 +78,10 @@ export class HighchartsComponent implements OnInit {
     // not work
     // this.isShowText = true;
     // this.changeDetectorRef.markForCheck();
+
+    // work
+    // this.isShowText = true;
+    // this.changeDetectorRef.detectChanges();
   }
 
   noop() {}
