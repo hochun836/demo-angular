@@ -15,6 +15,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { YoutubeComponent } from './youtube/youtube.component';
 import { ChangeDetectionComponent } from './change-detection/change-detection.component';
 import { LifecycleComponent } from './lifecycle/lifecycle.component';
+import { ReferenceComponent } from './reference/reference.component';
 
 const routes: Routes = [
   { path: 'main', component: MainComponent, data: { breadcrumb: '首頁' } },
@@ -32,6 +33,7 @@ const routes: Routes = [
   { path: 'change-detection', component: ChangeDetectionComponent, data: { breadcrumb: '變化偵測' } },
   { path: 'highcharts', component: HighchartsComponent, data: { breadcrumb: 'Highcharts' } },
   { path: 'dashboard', component: DashboardComponent, data: { breadcrumb: 'Dashboard' } },
+  { path: 'reference', component: ReferenceComponent, data: { breadcrumb: '參考' } },
   { path: '', redirectTo: 'main', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 ];

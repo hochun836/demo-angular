@@ -29,6 +29,7 @@ import { ChangeDetectionComponent } from './change-detection/change-detection.co
 import { ChangeDetectionInnerComponent } from './change-detection/change-detection-inner.component';
 import { ChangeDetectionOutterComponent } from './change-detection/change-detection-outter.component';
 import { LifecycleComponent } from './lifecycle/lifecycle.component';
+import { ReferenceComponent } from './reference/reference.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { LifecycleComponent } from './lifecycle/lifecycle.component';
     ChangeDetectionComponent,
     ChangeDetectionInnerComponent,
     ChangeDetectionOutterComponent,
-    LifecycleComponent
+    LifecycleComponent,
+    ReferenceComponent
   ],
   imports: [
     BrowserModule,
