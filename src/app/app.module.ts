@@ -32,6 +32,7 @@ import { ReferenceComponent } from './reference/reference.component';
 import { SharedMaterialModule } from './shared-material.module';
 import { ToolComponent } from './tool/tool.component';
 import { YoutubeComponent } from './youtube/youtube.component';
+import { RouteReuseComponent } from './route-reuse/route-reuse.component';
 
 
 @NgModule({
@@ -58,7 +59,8 @@ import { YoutubeComponent } from './youtube/youtube.component';
     ChangeDetectionOutterComponent,
     LifecycleComponent,
     ReferenceComponent,
-    ToolComponent
+    ToolComponent,
+    RouteReuseComponent
   ],
   imports: [
     BrowserModule,
