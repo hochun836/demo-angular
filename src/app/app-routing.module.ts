@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { AngularMaterialComponent } from './angular-material/angular-material.component';
 import { CdkComponent } from './cdk/cdk.component';
+import { ChangeDetectionComponent } from './change-detection/change-detection.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { GoogleMapComponent } from './google-map/google-map.component';
 import { HighchartsComponent } from './highcharts/highcharts.component';
+import { LifecycleComponent } from './lifecycle/lifecycle.component';
 import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
 import { MemberComponent } from './member/member.component';
@@ -12,32 +14,32 @@ import { ProfileComponent } from './member/profile.component';
 import { RegisterComponent } from './member/register.component';
 import { SettingComponent } from './member/setting.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { YoutubeComponent } from './youtube/youtube.component';
-import { ChangeDetectionComponent } from './change-detection/change-detection.component';
-import { LifecycleComponent } from './lifecycle/lifecycle.component';
 import { ReferenceComponent } from './reference/reference.component';
 import { ToolComponent } from './tool/tool.component';
+import { YoutubeComponent } from './youtube/youtube.component';
 
 const routes: Routes = [
-  { path: 'main', component: MainComponent, data: { breadcrumb: '首頁' } },
-  { path: 'login', component: LoginComponent, data: { breadcrumb: '登入頁面' } },
-  { path: 'google-map', component: GoogleMapComponent, data: { breadcrumb: 'Google Map' } },
-  { path: 'youtube', component: YoutubeComponent, data: { breadcrumb: 'Youtube' } },
-  { path: 'angular-material', component: AngularMaterialComponent, data: { breadcrumb: 'Angular Material' } },
-  { path: 'cdk', component: CdkComponent, data: { breadcrumb: 'Cdk' } },
-  { path: 'member', component: MemberComponent, data: { breadcrumb: '會員中心' }, children: [
-    { path: 'register', component: RegisterComponent, data: { breadcrumb: '註冊' } },
-    { path: 'profile', component: ProfileComponent, data: { breadcrumb: '個人頁面' } },
-    { path: 'setting', component: SettingComponent, data: { breadcrumb: '設定' } },
-  ] },
-  { path: 'lifecycle', component: LifecycleComponent, data: { breadcrumb: '生命週期' } },
-  { path: 'change-detection', component: ChangeDetectionComponent, data: { breadcrumb: '變化偵測' } },
-  { path: 'highcharts', component: HighchartsComponent, data: { breadcrumb: 'Highcharts' } },
-  { path: 'dashboard', component: DashboardComponent, data: { breadcrumb: 'Dashboard' } },
-  { path: 'tool', component: ToolComponent, data: { breadcrumb: '工具' } },
-  { path: 'reference', component: ReferenceComponent, data: { breadcrumb: '參考' } },
+  { path: 'main', component: MainComponent, data: { breadcrumb: '首頁', resue: false } },
+  { path: 'login', component: LoginComponent, data: { breadcrumb: '登入頁面', resue: false } },
+  { path: 'google-map', component: GoogleMapComponent, data: { breadcrumb: 'Google Map', resue: false } },
+  { path: 'youtube', component: YoutubeComponent, data: { breadcrumb: 'Youtube', resue: false } },
+  { path: 'angular-material', component: AngularMaterialComponent, data: { breadcrumb: 'Angular Material', resue: false } },
+  { path: 'cdk', component: CdkComponent, data: { breadcrumb: 'Cdk', resue: false } },
+  {
+    path: 'member', component: MemberComponent, data: { breadcrumb: '會員中心', resue: false }, children: [
+      { path: 'register', component: RegisterComponent, data: { breadcrumb: '註冊', resue: false } },
+      { path: 'profile', component: ProfileComponent, data: { breadcrumb: '個人頁面', resue: false } },
+      { path: 'setting', component: SettingComponent, data: { breadcrumb: '設定', resue: false } },
+    ]
+  },
+  { path: 'lifecycle', component: LifecycleComponent, data: { breadcrumb: '生命週期', resue: false } },
+  { path: 'change-detection', component: ChangeDetectionComponent, data: { breadcrumb: '變化偵測', resue: false } },
+  { path: 'highcharts', component: HighchartsComponent, data: { breadcrumb: 'Highcharts', resue: false } },
+  { path: 'dashboard', component: DashboardComponent, data: { breadcrumb: 'Dashboard', resue: false } },
+  { path: 'tool', component: ToolComponent, data: { breadcrumb: '工具', resue: false } },
+  { path: 'reference', component: ReferenceComponent, data: { breadcrumb: '參考', resue: false } },
   { path: '', redirectTo: 'main', pathMatch: 'full' },
-  { path: '**', component: PageNotFoundComponent },
+  { path: '**', component: PageNotFoundComponent, data: { resue: false } },
 ];
 
 @NgModule({
