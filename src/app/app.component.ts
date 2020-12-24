@@ -1,5 +1,5 @@
 import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -25,6 +25,9 @@ export class AppComponent implements OnInit, OnDestroy {
     this._routerSubscription = this.router.events.subscribe(event => {
       // console.log('#', event);
       // console.log('#', event, this.activatedRoute);
+      if (event instanceof NavigationStart) {
+        console.log('#', event, this.activatedRoute);
+      }
       if (event instanceof NavigationEnd) {
         console.log('#', event, this.activatedRoute);
         this.breadcrumbs.length = 0;

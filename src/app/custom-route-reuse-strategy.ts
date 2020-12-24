@@ -24,7 +24,7 @@ export class CustomRouteReuseStrategy implements RouteReuseStrategy {
    */
   public shouldReuseRoute(future: ActivatedRouteSnapshot, current: ActivatedRouteSnapshot): boolean {
     const isReuseRoute = future.routeConfig === current.routeConfig;
-    console.log(`『 future: ${this.getPath(future)} - current: ${this.getPath(current)} 』 shouldReuseRoute:`, isReuseRoute)
+    console.log(`█ future: ${this.getPath(future)} - current: ${this.getPath(current)} █ shouldReuseRoute:`, isReuseRoute)
     return isReuseRoute;
   }
 
@@ -34,7 +34,7 @@ export class CustomRouteReuseStrategy implements RouteReuseStrategy {
    */
   public retrieve(route: ActivatedRouteSnapshot): DetachedRouteHandle {
     const handler = this.getHandler(route);
-    console.log(`『 ${this.getPath(route)} 』 retrieve:`, handler)
+    console.log(`█ ${this.getPath(route)} █ retrieve:`, handler)
     return handler;
   }
 
@@ -47,7 +47,7 @@ export class CustomRouteReuseStrategy implements RouteReuseStrategy {
    */
   public shouldDetach(route: ActivatedRouteSnapshot): boolean {
     const isDetach = route.data['reuse'];
-    console.log(`『 ${this.getPath(route)} 』 shouldDetach:`, isDetach);
+    console.log(`█ ${this.getPath(route)} █ shouldDetach:`, isDetach);
     return isDetach;
   }
 
@@ -62,7 +62,7 @@ export class CustomRouteReuseStrategy implements RouteReuseStrategy {
    */
   public store(route: ActivatedRouteSnapshot, handle: DetachedRouteHandle): void {
     CustomRouteReuseStrategy.handlers[route.routeConfig.path] = handle; // 將目前路由內容暫存起來
-    console.log(`『 ${this.getPath(route)} 』 store:`, this, CustomRouteReuseStrategy.handlers); // this 是 CustomRouteReuseStrategy 的實例, 但 handlers 是綁在 class CustomRouteReuseStrategy 的身上
+    console.log(`█ ${this.getPath(route)} █ store:`, this, CustomRouteReuseStrategy.handlers); // this 是 CustomRouteReuseStrategy 的實例, 但 handlers 是綁在 class CustomRouteReuseStrategy 的身上
   }
 
   /**
@@ -72,7 +72,7 @@ export class CustomRouteReuseStrategy implements RouteReuseStrategy {
    */
   public shouldAttach(route: ActivatedRouteSnapshot): boolean {
     const isAttach = !!route.routeConfig && !!CustomRouteReuseStrategy.handlers[route.routeConfig.path]
-    console.log(`『 ${this.getPath(route)} 』 shouldAttach:`, isAttach)
+    console.log(`█ ${this.getPath(route)} █ shouldAttach:`, isAttach)
     return isAttach;
   }
 
