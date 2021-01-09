@@ -18,6 +18,7 @@ import { SettingComponent } from './member/setting.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ReferenceComponent } from './reference/reference.component';
 import { RouteReuseComponent } from './route-reuse/route-reuse.component';
+import { ScrollbarComponent } from './scrollbar/scrollbar.component';
 import { ToolComponent } from './tool/tool.component';
 import { YoutubeComponent } from './youtube/youtube.component';
 
@@ -40,6 +41,7 @@ const routes: Routes = [
   { path: 'highcharts', component: HighchartsComponent, data: { breadcrumb: 'Highcharts', reuse: false } },
   { path: 'chartjs', component: ChartjsComponent, data: { breadcrumb: 'Chart.js', reuse: false } },
   { path: 'hammerjs', component: HammerjsComponent, data: { breadcrumb: 'Hammer.js', reuse: false } },
+  { path: 'scrollbar', component: ScrollbarComponent, data: { breadcrumb: 'Scrollbar', reuse: false } },
   { path: 'dashboard', component: DashboardComponent, data: { breadcrumb: 'Dashboard', reuse: false } },
   { path: 'route-reuse', component: RouteReuseComponent, data: { breadcrumb: '路由複用', reuse: true } },
   { path: 'tool', component: ToolComponent, data: { breadcrumb: '工具', reuse: false } },

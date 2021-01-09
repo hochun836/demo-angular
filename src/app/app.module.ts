@@ -36,6 +36,7 @@ import { RouteReuseComponent } from './route-reuse/route-reuse.component';
 import { SharedMaterialModule } from './shared-material.module';
 import { ToolComponent } from './tool/tool.component';
 import { YoutubeComponent } from './youtube/youtube.component';
+import { ScrollbarComponent } from './scrollbar/scrollbar.component';
 
 export class HammerConfig extends HammerGestureConfig {
   overrides = <any>{
@@ -70,7 +71,8 @@ export class HammerConfig extends HammerGestureConfig {
     ToolComponent,
     RouteReuseComponent,
     ChartjsComponent,
-    HammerjsComponent
+    HammerjsComponent,
+    ScrollbarComponent
   ],
   imports: [
     BrowserModule,
