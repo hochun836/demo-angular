@@ -2,10 +2,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { GoogleMapsModule } from '@angular/google-maps';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HammerGestureConfig, HammerModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouteReuseStrategy } from '@angular/router';
 import { YouTubePlayerModule } from '@angular/youtube-player';
+import 'hammerjs';
 import { AngularMaterialComponent } from './angular-material/angular-material.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +21,7 @@ import { ChartjsComponent } from './chartjs/chartjs.component';
 import { CustomRouteReuseStrategy } from './custom-route-reuse-strategy';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { GoogleMapComponent } from './google-map/google-map.component';
+import { HammerjsComponent } from './hammerjs/hammerjs.component';
 import { HighchartsComponent } from './highcharts/highcharts.component';
 import { LifecycleComponent } from './lifecycle/lifecycle.component';
 import { LoginComponent } from './login/login.component';
@@ -34,6 +36,12 @@ import { RouteReuseComponent } from './route-reuse/route-reuse.component';
 import { SharedMaterialModule } from './shared-material.module';
 import { ToolComponent } from './tool/tool.component';
 import { YoutubeComponent } from './youtube/youtube.component';
+
+export class HammerConfig extends HammerGestureConfig {
+  overrides = <any>{
+    swipe: { direction: Hammer.DIRECTION_ALL },
+  };
+}
 
 @NgModule({
   declarations: [
@@ -61,11 +69,13 @@ import { YoutubeComponent } from './youtube/youtube.component';
     ReferenceComponent,
     ToolComponent,
     RouteReuseComponent,
-    ChartjsComponent
+    ChartjsComponent,
+    HammerjsComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    HammerModule,
     GoogleMapsModule,
     YouTubePlayerModule,
     AppRoutingModule,
@@ -75,6 +85,7 @@ import { YoutubeComponent } from './youtube/youtube.component';
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: CustomRouteReuseStrategy },
+    { provide: HAMMER_GESTURE_CONFIG, useClass: HammerConfig }
   ],
   bootstrap: [AppComponent]
 })

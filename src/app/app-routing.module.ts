@@ -6,6 +6,7 @@ import { ChangeDetectionComponent } from './change-detection/change-detection.co
 import { ChartjsComponent } from './chartjs/chartjs.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { GoogleMapComponent } from './google-map/google-map.component';
+import { HammerjsComponent } from './hammerjs/hammerjs.component';
 import { HighchartsComponent } from './highcharts/highcharts.component';
 import { LifecycleComponent } from './lifecycle/lifecycle.component';
 import { LoginComponent } from './login/login.component';
@@ -38,6 +39,7 @@ const routes: Routes = [
   { path: 'change-detection', component: ChangeDetectionComponent, data: { breadcrumb: '變化偵測', reuse: false } },
   { path: 'highcharts', component: HighchartsComponent, data: { breadcrumb: 'Highcharts', reuse: false } },
   { path: 'chartjs', component: ChartjsComponent, data: { breadcrumb: 'Chart.js', reuse: false } },
+  { path: 'hammerjs', component: HammerjsComponent, data: { breadcrumb: 'Hammer.js', reuse: false } },
   { path: 'dashboard', component: DashboardComponent, data: { breadcrumb: 'Dashboard', reuse: false } },
   { path: 'route-reuse', component: RouteReuseComponent, data: { breadcrumb: '路由複用', reuse: true } },
   { path: 'tool', component: ToolComponent, data: { breadcrumb: '工具', reuse: false } },
