@@ -16,6 +16,7 @@ import { CdkComponent } from './cdk/cdk.component';
 import { ChangeDetectionInnerComponent } from './change-detection/change-detection-inner.component';
 import { ChangeDetectionOutterComponent } from './change-detection/change-detection-outter.component';
 import { ChangeDetectionComponent } from './change-detection/change-detection.component';
+import { ChartjsComponent } from './chartjs/chartjs.component';
 import { CustomRouteReuseStrategy } from './custom-route-reuse-strategy';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { GoogleMapComponent } from './google-map/google-map.component';
@@ -29,11 +30,10 @@ import { RegisterComponent } from './member/register.component';
 import { SettingComponent } from './member/setting.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ReferenceComponent } from './reference/reference.component';
+import { RouteReuseComponent } from './route-reuse/route-reuse.component';
 import { SharedMaterialModule } from './shared-material.module';
 import { ToolComponent } from './tool/tool.component';
 import { YoutubeComponent } from './youtube/youtube.component';
-import { RouteReuseComponent } from './route-reuse/route-reuse.component';
-
 
 @NgModule({
   declarations: [
@@ -60,7 +60,8 @@ import { RouteReuseComponent } from './route-reuse/route-reuse.component';
     LifecycleComponent,
     ReferenceComponent,
     ToolComponent,
-    RouteReuseComponent
+    RouteReuseComponent,
+    ChartjsComponent
   ],
   imports: [
     BrowserModule,

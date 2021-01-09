@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AngularMaterialComponent } from './angular-material/angular-material.component';
 import { CdkComponent } from './cdk/cdk.component';
 import { ChangeDetectionComponent } from './change-detection/change-detection.component';
+import { ChartjsComponent } from './chartjs/chartjs.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { GoogleMapComponent } from './google-map/google-map.component';
 import { HighchartsComponent } from './highcharts/highcharts.component';
@@ -36,6 +37,7 @@ const routes: Routes = [
   { path: 'lifecycle', component: LifecycleComponent, data: { breadcrumb: '生命週期', reuse: false } },
   { path: 'change-detection', component: ChangeDetectionComponent, data: { breadcrumb: '變化偵測', reuse: false } },
   { path: 'highcharts', component: HighchartsComponent, data: { breadcrumb: 'Highcharts', reuse: false } },
+  { path: 'chartjs', component: ChartjsComponent, data: { breadcrumb: 'Chart.js', reuse: false } },
   { path: 'dashboard', component: DashboardComponent, data: { breadcrumb: 'Dashboard', reuse: false } },
   { path: 'route-reuse', component: RouteReuseComponent, data: { breadcrumb: '路由複用', reuse: true } },
   { path: 'tool', component: ToolComponent, data: { breadcrumb: '工具', reuse: false } },
