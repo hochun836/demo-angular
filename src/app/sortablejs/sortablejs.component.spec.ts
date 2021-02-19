@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ToolComponent } from './tool.component';
+import { SortablejsComponent } from './sortablejs.component';
 
-describe('ToolComponent', () => {
-  let component: ToolComponent;
-  let fixture: ComponentFixture<ToolComponent>;
+describe('SortablejsComponent', () => {
+  let component: SortablejsComponent;
+  let fixture: ComponentFixture<SortablejsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ToolComponent ]
+      declarations: [ SortablejsComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ToolComponent);
+    fixture = TestBed.createComponent(SortablejsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

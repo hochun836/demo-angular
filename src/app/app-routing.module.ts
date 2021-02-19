@@ -20,7 +20,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { ReferenceComponent } from './reference/reference.component';
 import { RouteReuseComponent } from './route-reuse/route-reuse.component';
 import { ScrollbarComponent } from './scrollbar/scrollbar.component';
-import { ToolComponent } from './tool/tool.component';
+import { SheetjsComponent } from './sheetjs/sheetjs.component';
+import { SortablejsComponent } from './sortablejs/sortablejs.component';
+import { StockComponent } from './stock/stock.component';
 import { YoutubeComponent } from './youtube/youtube.component';
 
 const routes: Routes = [
@@ -46,7 +48,9 @@ const routes: Routes = [
   { path: 'animate-css', component: AnimateCssComponent, data: { breadcrumb: 'Animate.css', reuse: false } },
   { path: 'dashboard', component: DashboardComponent, data: { breadcrumb: 'Dashboard', reuse: false } },
   { path: 'route-reuse', component: RouteReuseComponent, data: { breadcrumb: '路由複用', reuse: true } },
-  { path: 'tool', component: ToolComponent, data: { breadcrumb: '工具', reuse: false } },
+  { path: 'stock', component: StockComponent, data: { breadcrumb: '證券', reuse: false } },
+  { path: 'sortable-js', component: SortablejsComponent, data: { breadcrumb: 'SortableJS', reuse: false } },
+  { path: 'sheet-js', component: SheetjsComponent, data: { breadcrumb: 'SheetJS', reuse: false } },
   { path: 'reference', component: ReferenceComponent, data: { breadcrumb: '參考', reuse: false } },
   { path: '', redirectTo: 'main', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent, data: { reuse: false } },

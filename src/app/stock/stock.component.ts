@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { toNumber } from '../util';
 
 @Component({
-  selector: 'app-tool',
-  templateUrl: './tool.component.html',
-  styleUrls: ['./tool.component.scss']
+  selector: 'app-stock',
+  templateUrl: './stock.component.html',
+  styleUrls: ['./stock.component.scss']
 })
-export class ToolComponent implements OnInit {
+export class StockComponent implements OnInit {
 
   stock = {
     cost: { price: undefined, handlingFee: 0.1425, number: 1 },

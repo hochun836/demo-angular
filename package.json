@@ -40,8 +40,10 @@
     "highcharts": "^8.2.2",
     "path": "^0.12.7",
     "rxjs": "~6.6.0",
+    "sortablejs": "^1.13.0",
     "tslib": "^2.0.0",
     "typescript": "~4.0.2",
+    "xlsx": "^0.16.9",
     "zone.js": "~0.10.2"
   },
   "engines": {

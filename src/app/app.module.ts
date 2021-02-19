@@ -8,6 +8,7 @@ import { RouteReuseStrategy } from '@angular/router';
 import { YouTubePlayerModule } from '@angular/youtube-player';
 import 'hammerjs';
 import { AngularMaterialComponent } from './angular-material/angular-material.component';
+import { AnimateCssComponent } from './animate-css/animate-css.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CdkDemo1Component } from './cdk/cdk-demo1.component';
@@ -33,11 +34,12 @@ import { SettingComponent } from './member/setting.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ReferenceComponent } from './reference/reference.component';
 import { RouteReuseComponent } from './route-reuse/route-reuse.component';
-import { SharedMaterialModule } from './shared-material.module';
-import { ToolComponent } from './tool/tool.component';
-import { YoutubeComponent } from './youtube/youtube.component';
 import { ScrollbarComponent } from './scrollbar/scrollbar.component';
-import { AnimateCssComponent } from './animate-css/animate-css.component';
+import { SharedMaterialModule } from './shared-material.module';
+import { SheetjsComponent } from './sheetjs/sheetjs.component';
+import { SortablejsComponent } from './sortablejs/sortablejs.component';
+import { StockComponent } from './stock/stock.component';
+import { YoutubeComponent } from './youtube/youtube.component';
 
 export class HammerConfig extends HammerGestureConfig {
   overrides = <any>{
@@ -69,12 +71,14 @@ export class HammerConfig extends HammerGestureConfig {
     ChangeDetectionOutterComponent,
     LifecycleComponent,
     ReferenceComponent,
-    ToolComponent,
     RouteReuseComponent,
     ChartjsComponent,
     HammerjsComponent,
     ScrollbarComponent,
-    AnimateCssComponent
+    AnimateCssComponent,
+    StockComponent,
+    SortablejsComponent,
+    SheetjsComponent
   ],
   imports: [
     BrowserModule,
