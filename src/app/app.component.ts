@@ -12,7 +12,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private _routerSubscription: any;
   breadcrumbs = [];
 
-  ENV_NAME = environment.ENV_NAME;
+  name = environment.name;
   title = 'demo-angular';
 
   constructor(
