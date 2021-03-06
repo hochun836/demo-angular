@@ -3,8 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  ENV_NAME: 'LOCAL',
-  production: false
+  production: false,
+  name: 'LOCAL',
 };
 
 /*

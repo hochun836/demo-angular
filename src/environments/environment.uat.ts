@@ -1,4 +1,4 @@
 export const environment = {
-  ENV_NAME: 'UAT',
-  production: true
+  production: true,
+  name: 'UAT',
 };
