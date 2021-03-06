@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import * as Highcharts from 'highcharts';
-import { AppComponent } from '../app.component';
+import { AppComponent } from 'src/app/app.component';
 import options from './options';
 
 declare var require: any;
@@ -65,12 +65,12 @@ export class HighchartsComponent implements OnInit {
 
     // not work
     // this.isShowText = true;
-    
+
     // work
     this.appComponent.zone.run(() => {
       this.isShowText = true;
     });
-    
+
     // work
     // this.isShowText = true;
     // this.appComponent.zone.run(() => {});

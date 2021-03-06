@@ -1,0 +1,5 @@
+<button (click)="export()">匯出</button> |
+<input type="file" accept=".xls,.xlsx" (change)="onFileChange($event)" />
+
+<textarea [ngModel]="result"></textarea>
+

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { toNumber } from '../util';
+import { toNumber } from 'src/app/common/util';
 
 @Component({
   selector: 'app-stock',

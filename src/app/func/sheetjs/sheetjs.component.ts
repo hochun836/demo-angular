@@ -10,6 +10,9 @@ type AOA = any[][];
 })
 export class SheetjsComponent implements OnInit {
 
+  result: string;
+
+
   data: AOA = [[1, 2], [3, 4]];
   wopts: XLSX.WritingOptions = { bookType: 'xlsx', type: 'array' };
   fileName: string = 'SheetJS.xlsx';

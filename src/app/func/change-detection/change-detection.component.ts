@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { AppComponent } from '../app.component';
+import { AppComponent } from 'src/app/app.component';
 
 // 參考1: https://blog.kevinyang.net/2019/02/14/ng-ngzone/
 // 參考2: https://stackblitz.com/edit/angular-zone-change-detection?file=src/app/app.component.ts
