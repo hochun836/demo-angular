@@ -10,7 +10,6 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { CustomRouteReuseStrategy } from "./common/custom-route-reuse-strategy";
 import { AngularMaterialComponent } from "./func/angular-material/angular-material.component";
-import { AnimateCssComponent } from "./func/animate-css/animate-css.component";
 import { CdkDemo1Component } from "./func/cdk/cdk-demo1.component";
 import { CdkDemo2Component } from "./func/cdk/cdk-demo2.component";
 import { CdkDemo3Component } from "./func/cdk/cdk-demo3.component";
@@ -19,25 +18,20 @@ import { ChangeDetectionInnerComponent } from "./func/change-detection/change-de
 import { ChangeDetectionOutterComponent } from "./func/change-detection/change-detection-outter.component";
 import { ChangeDetectionComponent } from "./func/change-detection/change-detection.component";
 import { ChartjsComponent } from "./func/chartjs/chartjs.component";
-import { DashboardComponent } from "./func/dashboard/dashboard.component";
-import { GoogleMapComponent } from "./func/google-map/google-map.component";
 import { HammerjsComponent } from "./func/hammerjs/hammerjs.component";
 import { HighchartsComponent } from "./func/highcharts/highcharts.component";
 import { LifecycleComponent } from "./func/lifecycle/lifecycle.component";
-import { LoginComponent } from "./func/login/login.component";
 import { MainComponent } from "./func/main/main.component";
 import { MemberComponent } from "./func/member/member.component";
 import { ProfileComponent } from "./func/member/profile.component";
 import { RegisterComponent } from "./func/member/register.component";
 import { SettingComponent } from "./func/member/setting.component";
 import { PageNotFoundComponent } from "./func/page-not-found/page-not-found.component";
-import { ReferenceComponent } from "./func/reference/reference.component";
 import { RouteReuseComponent } from "./func/route-reuse/route-reuse.component";
 import { ScrollbarComponent } from "./func/scrollbar/scrollbar.component";
 import { SheetjsComponent } from "./func/sheetjs/sheetjs.component";
 import { SortablejsComponent } from "./func/sortablejs/sortablejs.component";
 import { StockComponent } from "./func/stock/stock.component";
-import { YoutubeComponent } from "./func/youtube/youtube.component";
 import { SharedModule } from "./shared/shared.module";
 
 export class HammerConfig extends HammerGestureConfig {
@@ -49,18 +43,14 @@ export class HammerConfig extends HammerGestureConfig {
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     PageNotFoundComponent,
     MainComponent,
-    GoogleMapComponent,
-    YoutubeComponent,
     AngularMaterialComponent,
     MemberComponent,
     RegisterComponent,
     ProfileComponent,
     SettingComponent,
     HighchartsComponent,
-    DashboardComponent,
     CdkComponent,
     CdkDemo1Component,
     CdkDemo2Component,
@@ -69,12 +59,10 @@ export class HammerConfig extends HammerGestureConfig {
     ChangeDetectionInnerComponent,
     ChangeDetectionOutterComponent,
     LifecycleComponent,
-    ReferenceComponent,
     RouteReuseComponent,
     ChartjsComponent,
     HammerjsComponent,
     ScrollbarComponent,
-    AnimateCssComponent,
     StockComponent,
     SortablejsComponent,
     SheetjsComponent,

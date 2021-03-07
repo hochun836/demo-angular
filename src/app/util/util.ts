@@ -28,10 +28,23 @@ export function isNotEmpty(param, checkPropertyEmpty = false): boolean {
   return !isEmpty(param, checkPropertyEmpty);
 }
 
-export function isNumber(arg): boolean {
-  return !isNaN(arg);
+/**
+ * check if param is number
+ */
+export function isNumber(param): boolean {
+  return !isNaN(param);
 }
 
-export function toNumber(arg, numberWhenFail = 0): number {
-  return isNumber(arg) ? arg * 1 : numberWhenFail;
+/**
+ * check if param is not number
+ */
+export function isNotNumber(param): boolean {
+  return !isNumber(param);
+}
+
+/**
+ * convert param to number
+ */
+export function toNumber(param, numberWhenFail = 0): number {
+  return isNumber(param) ? param * 1 : numberWhenFail;
 }

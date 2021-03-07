@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { DbType, ExcelRow } from 'src/app/common/scheme';
+import { createSql as createSql4Mssql } from 'src/app/util/mssql-util';
+import { createSql as createSql4Mysql } from 'src/app/util/mysql-util';
+import { createSql as createSql4Oracle } from 'src/app/util/oracle-util';
+import { isEmpty } from 'src/app/util/util';
 import * as XLSX from 'xlsx';
-
-type AOA = any[][];
 
 @Component({
   selector: 'app-sheetjs',
@@ -10,48 +13,58 @@ type AOA = any[][];
 })
 export class SheetjsComponent implements OnInit {
 
+  @ViewChild('file', { static: true }) fileRef: ElementRef<HTMLInputElement>;
+
+  DbType = DbType;
+  dbType: DbType;
+  reader = new FileReader();
+  rowList: ExcelRow[];
   result: string;
-
-
-  data: AOA = [[1, 2], [3, 4]];
-  wopts: XLSX.WritingOptions = { bookType: 'xlsx', type: 'array' };
-  fileName: string = 'SheetJS.xlsx';
 
   constructor() {
   }
 
   ngOnInit(): void {
-  }
-
-  onFileChange(evt: any) {
-    /* wire up file reader */
-    const target: DataTransfer = <DataTransfer>(evt.target);
-    if (target.files.length !== 1) throw new Error('Cannot use multiple files');
-    const reader: FileReader = new FileReader();
-    reader.onload = (e: any) => {
-      /* read workbook */
-      const bstr: string = e.target.result;
-      const wb: XLSX.WorkBook = XLSX.read(bstr, { type: 'binary' });
-
-      /* grab first sheet */
-      const wsname: string = wb.SheetNames[0];
-      const ws: XLSX.WorkSheet = wb.Sheets[wsname];
-
-      /* save data */
-      this.data = <AOA>(XLSX.utils.sheet_to_json(ws, { header: 1 }));
+    this.reader.onload = (event: ProgressEvent<FileReader>) => {
+      const binaryString = event.target.result as string;
+      const workbook: XLSX.WorkBook = XLSX.read(binaryString, { type: 'binary' });
+      const sheetName: string = workbook.SheetNames[0];
+      const sheet: XLSX.WorkSheet = workbook.Sheets[sheetName];
+      this.rowList = XLSX.utils.sheet_to_json<ExcelRow>(sheet);
     };
-    reader.readAsBinaryString(target.files[0]);
   }
 
-  export(): void {
-    /* generate worksheet */
-    const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(this.data);
+  handleFile() {
+    const files: FileList = this.fileRef.nativeElement.files;
+    if (files.length == 0) {
+      this.rowList = undefined;
+      return;
+    }
+    this.reader.readAsBinaryString(files[0]);
+  }
 
-    /* generate workbook and add the worksheet */
-    const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+  download(): void {
+  }
 
-    /* save to file */
-    XLSX.writeFile(wb, this.fileName);
+  convert(): void {
+    if (isEmpty(this.dbType)) {
+      alert('尚未選擇資料庫類型');
+      return;
+    }
+    if (isEmpty(this.fileRef.nativeElement.files)) {
+      alert('尚未選擇檔案');
+      return;
+    }
+    switch (this.dbType) {
+      case DbType.Oracle:
+        this.result = createSql4Oracle(this.rowList);
+        break;
+      case DbType.Mssql:
+        this.result = createSql4Mssql(this.rowList);
+        break;
+      case DbType.Mysql:
+        this.result = createSql4Mysql(this.rowList);
+        break;
+    }
   }
 }

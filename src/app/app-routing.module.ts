@@ -1,35 +1,26 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { AngularMaterialComponent } from "./func/angular-material/angular-material.component";
-import { AnimateCssComponent } from "./func/animate-css/animate-css.component";
 import { CdkComponent } from "./func/cdk/cdk.component";
 import { ChangeDetectionComponent } from "./func/change-detection/change-detection.component";
 import { ChartjsComponent } from "./func/chartjs/chartjs.component";
-import { DashboardComponent } from "./func/dashboard/dashboard.component";
-import { GoogleMapComponent } from "./func/google-map/google-map.component";
 import { HammerjsComponent } from "./func/hammerjs/hammerjs.component";
 import { HighchartsComponent } from "./func/highcharts/highcharts.component";
 import { LifecycleComponent } from "./func/lifecycle/lifecycle.component";
-import { LoginComponent } from "./func/login/login.component";
 import { MainComponent } from "./func/main/main.component";
 import { MemberComponent } from "./func/member/member.component";
 import { ProfileComponent } from "./func/member/profile.component";
 import { RegisterComponent } from "./func/member/register.component";
 import { SettingComponent } from "./func/member/setting.component";
 import { PageNotFoundComponent } from "./func/page-not-found/page-not-found.component";
-import { ReferenceComponent } from "./func/reference/reference.component";
 import { RouteReuseComponent } from "./func/route-reuse/route-reuse.component";
 import { ScrollbarComponent } from "./func/scrollbar/scrollbar.component";
 import { SheetjsComponent } from "./func/sheetjs/sheetjs.component";
 import { SortablejsComponent } from "./func/sortablejs/sortablejs.component";
 import { StockComponent } from "./func/stock/stock.component";
-import { YoutubeComponent } from "./func/youtube/youtube.component";
 
 const routes: Routes = [
   { path: 'main', component: MainComponent, data: { breadcrumb: '首頁', reuse: false } },
-  { path: 'login', component: LoginComponent, data: { breadcrumb: '登入頁面', reuse: false } },
-  { path: 'google-map', component: GoogleMapComponent, data: { breadcrumb: 'Google Map', reuse: false } },
-  { path: 'youtube', component: YoutubeComponent, data: { breadcrumb: 'Youtube', reuse: false } },
   { path: 'angular-material', component: AngularMaterialComponent, data: { breadcrumb: 'Angular Material', reuse: false } },
   { path: 'cdk', component: CdkComponent, data: { breadcrumb: 'Cdk', reuse: false } },
   {
@@ -45,13 +36,10 @@ const routes: Routes = [
   { path: 'chartjs', component: ChartjsComponent, data: { breadcrumb: 'Chart.js', reuse: false } },
   { path: 'hammerjs', component: HammerjsComponent, data: { breadcrumb: 'Hammer.js', reuse: false } },
   { path: 'scrollbar', component: ScrollbarComponent, data: { breadcrumb: 'Scrollbar', reuse: false } },
-  { path: 'animate-css', component: AnimateCssComponent, data: { breadcrumb: 'Animate.css', reuse: false } },
-  { path: 'dashboard', component: DashboardComponent, data: { breadcrumb: 'Dashboard', reuse: false } },
   { path: 'route-reuse', component: RouteReuseComponent, data: { breadcrumb: '路由複用', reuse: true } },
   { path: 'stock', component: StockComponent, data: { breadcrumb: '證券', reuse: false } },
   { path: 'sortable-js', component: SortablejsComponent, data: { breadcrumb: 'SortableJS', reuse: false } },
   { path: 'sheet-js', component: SheetjsComponent, data: { breadcrumb: 'SheetJS', reuse: false } },
-  { path: 'reference', component: ReferenceComponent, data: { breadcrumb: '參考', reuse: false } },
   { path: '', redirectTo: 'main', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent, data: { reuse: false } },
 ];
