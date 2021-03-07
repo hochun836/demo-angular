@@ -1,70 +1,32 @@
-import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
+import { OverlayContainer } from '@angular/cdk/overlay';
+import { Component, ElementRef, NgZone, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit {
 
-  private _routerSubscription: any;
-  breadcrumbs = [];
-
-  name = environment.name;
-  title = 'demo-angular';
+  @ViewChild('container', { static: true }) containerRef: ElementRef<HTMLDivElement>;
 
   constructor(
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
     public zone: NgZone,
+    private renderer: Renderer2,
+    private overlayContainer: OverlayContainer,
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer,
   ) { }
 
   ngOnInit(): void {
-    this._routerSubscription = this.router.events.subscribe(event => {
-      // console.log('#', event);
-      // console.log('#', event, this.activatedRoute);
-      if (event instanceof NavigationStart) {
-        console.log('#', event, this.activatedRoute);
-      }
-      if (event instanceof NavigationEnd) {
-        console.log('#', event, this.activatedRoute);
-        this.breadcrumbs.length = 0;
-        this.createBreadcrumbs(this.activatedRoute);
-      }
-    });
+    this.renderer.addClass(this.containerRef.nativeElement, 'light-theme');
+    this.renderer.addClass(this.overlayContainer.getContainerElement(), 'light-theme');
+    const url = this.domSanitizer.bypassSecurityTrustResourceUrl('assets/image/angular.svg');
+    this.matIconRegistry.addSvgIconInNamespace('custom-svg', 'angular', url);
+    this.matIconRegistry.registerFontClassAlias('fontawesome', 'fa');
     this.zone.onUnstable.subscribe(() => { console.log('##### 事件 - 發生') });
     this.zone.onStable.subscribe(() => { console.log('##### 事件 - 結束') });
-  }
-
-  activate(e) {
-    console.log('activate route', e);
-  }
-
-  createBreadcrumbs(route: ActivatedRoute) {
-
-    const children: ActivatedRoute[] = route.children;
-    if (children.length === 0) {
-      return;
-    }
-
-    for (const child of children) {
-      if (child.outlet !== 'primary') {
-        continue;
-      }
-      const breadcrumb = {
-        label: child.snapshot.data['breadcrumb'],
-        url: child.snapshot.routeConfig.path,
-      };
-      if (child.component) {
-        this.breadcrumbs.push(breadcrumb);
-      }
-      return this.createBreadcrumbs(child);
-    }
-  }
-
-  ngOnDestroy(): void {
-      this._routerSubscription.unsubscribe();
   }
 }

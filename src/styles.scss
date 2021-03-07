@@ -1,34 +1,42 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'src/scss/shared';
 
-////////////////////////////////////////////
-///////////// angular-material /////////////
-////////////////////////////////////////////
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-////////////////////////////////////////////
-////////////////// custom //////////////////
-////////////////////////////////////////////
-h1 {
-  color: blue;
+html,
+body {
+  height: 100%;
 }
 
-h3 {
-  &:not(:first-of-type) {
-    padding-top: 16px; 
+body {
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a.link {
+  text-decoration: none;
+
+  &:visited {
+    color: inherit;
   }
-  color: lightskyblue;
+
+  &:active {
+    color: inherit;
+  }
+
+  &:link {
+    color: inherit;
+  }
 }
 
-button.router-active {
-  background-color: #4e4e4e;
-  color: #ffff00;
-  font-weight: bold;
-  border-radius: 10px;
+mat-icon.fa {
+  font-size: 1.7rem;
 }
 
-button:focus {
-  // override chrome
-  // outline: -webkit-focus-ring-color auto 1px;
-  outline: inherit;
+.flex-rest {
+  flex: 1 1;
+}
+
+.router-active {
+  border-left: 5px solid $primary-color;
 }

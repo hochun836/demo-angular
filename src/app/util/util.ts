@@ -48,3 +48,37 @@ export function isNotNumber(param): boolean {
 export function toNumber(param, numberWhenFail = 0): number {
   return isNumber(param) ? param * 1 : numberWhenFail;
 }
+
+/**
+ * in array, move item from oldIndex to newIndex
+ * input:
+ *  array: [ 0, 1, 2, 3, 4, 5 ]
+ *  oldIndex: 3
+ *  newIndex: 2
+ * result:
+ *  array: [ 0, 1, 3, 2, 4, 5 ]
+ */
+export function moveItem(array: any[], oldIndex: number, newIndex: number): void {
+  if (isInvalidIndex(array, oldIndex)) {
+    throw new Error(`invliad oldIndex ${oldIndex}`);
+  }
+  if (isInvalidIndex(array, newIndex)) {
+    throw new Error(`invliad newIndex ${newIndex}`);
+  }
+  const item = array.splice(oldIndex, 1)[0];
+  array.splice(newIndex, 0, item);
+}
+
+/**
+ * in array, check index is valid
+ */
+export function isValidIndex(array: any[], index: number): boolean {
+  return index >= 0 && index <= array.length - 1;
+}
+
+/**
+ * in array, check index is invalid
+ */
+export function isInvalidIndex(array: any[], index: number): boolean {
+  return !isValidIndex(array, index);
+}
