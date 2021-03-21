@@ -1,9 +1,10 @@
+export type SnavMode = 'over' | 'push' | 'side';
+
 export enum DbType {
   Oracle = 'A',
   Mssql = 'B',
   Mysql = 'C',
 }
-
 export interface ExcelRow {
   TableId,
   TableName,

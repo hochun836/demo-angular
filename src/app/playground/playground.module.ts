@@ -5,11 +5,13 @@ import { SharedModule } from '../shared/shared.module';
 import { HeaderComponent } from './header.component';
 import { PlaygroundRoutingModule } from './playground-routing.module';
 import { PlaygroundComponent } from './playground.component';
+import { WelcomeComponent } from './welcome.component';
 
 @NgModule({
   declarations: [
     PlaygroundComponent,
     HeaderComponent,
+    WelcomeComponent,
     Func0010Component,
     Func0020Component,
   ],

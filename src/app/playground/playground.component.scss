@@ -39,3 +39,8 @@ mat-nav-list {
 .content {
   margin: 1rem;
 }
+
+.router-active {
+  border-left: 5px solid $primary-color;
+  color: $primary-color !important;
+}
