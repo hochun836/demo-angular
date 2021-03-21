@@ -1,1 +1,52 @@
-<p>func0020 works!</p>
+<div>
+  <span>資料庫:</span>
+  <input type="radio" id="oracle" name="oracle" value="oracle" [(ngModel)]="dbType" (click)="template = oracle">
+  <label for="oracle">Oracle</label>
+  <input type="radio" id="mssql" name="mssql" value="mssql" [(ngModel)]="dbType" (click)="template = mssql">
+  <label for="mssql">Mssql</label>
+  <input type="radio" id="mysql" name="mysql" value="mysql" [(ngModel)]="dbType" (click)="template = mysql">
+  <label for="mysql">Mysql</label>
+</div>
+
+<div class="option">
+  <ng-container *ngTemplateOutlet="template"></ng-container>
+</div>
+
+<textarea readonly [(ngModel)]="sql"></textarea>
+
+<button mat-button color="primary" [cdkCopyToClipboard]="sql">複製到剪貼簿</button>
+
+<!-- Template -->
+
+<ng-template #oracle>
+</ng-template>
+
+<ng-template #mssql>
+  <form #form>
+    <div class="row">
+      <label for="owner" class="required">Owner</label>
+      <input type="text" id="owner" name="owner" [(ngModel)]="model.owner">
+    </div>
+  </form>
+</ng-template>
+
+<ng-template #mysql>
+  <form #form>
+    <div class="row">
+      <label for="characterSet" class="required">Character Set</label>
+      <input type="text" id="characterSet" name="characterSet" [(ngModel)]="model.characterSet">
+    </div>
+    <div class="row">
+      <label for="collate" class="required">Collate</label>
+      <input type="text" id="collate" name="collate" [(ngModel)]="model.collate">
+    </div>
+    <div class="row">
+      <label for="file" class="required">File</label>
+      <a mat-button color="primary" [href]="url" target="_blank">範例下載</a>
+      <input type="text" id="fileName" name="fileName" [(ngModel)]="fileName">
+    </div>
+    <div class="row">
+      <button mat-flat-button color="primary" (click)="excel2Sql();">轉成 SQL</button>
+    </div>
+  </form>
+</ng-template>

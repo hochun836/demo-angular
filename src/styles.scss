@@ -36,3 +36,25 @@ mat-icon.fa {
 .flex-rest {
   flex: 1 1;
 }
+
+.hide {
+  display: none;
+}
+
+.row {
+  display: block;
+  margin: 1.5%;
+
+  label {
+
+    &.required::before {
+      content: '* ';
+      color: red;
+    }
+  }
+
+  input[type=text] {
+    width: 100%;
+    padding: 0.5rem 1rem;
+  }
+}
