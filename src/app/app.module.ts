@@ -15,7 +15,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { SharedModule } from './shared/shared.module';
 
 export class HammerConfig extends HammerGestureConfig {
-  overrides = <any>{
+  overrides = {
     swipe: { direction: Hammer.DIRECTION_ALL },
   };
 }
