@@ -9,44 +9,67 @@
 </div>
 
 <div class="option">
-  <ng-container *ngTemplateOutlet="template"></ng-container>
+  <ng-container *ngTemplateOutlet="template ? template : default"></ng-container>
 </div>
 
 <textarea readonly [(ngModel)]="sql"></textarea>
 
-<button mat-button color="primary" [cdkCopyToClipboard]="sql">複製到剪貼簿</button>
+<button type="button" mat-button color="primary" [cdkCopyToClipboard]="sql">複製到剪貼簿</button>
 
 <!-- Template -->
+
+<ng-template #default>
+  <div class="hint">請選擇資料庫</div>
+</ng-template>
 
 <ng-template #oracle>
 </ng-template>
 
 <ng-template #mssql>
-  <form #form>
+  <form #form="ngForm">
     <div class="row">
       <label for="owner" class="required">Owner</label>
-      <input type="text" id="owner" name="owner" [(ngModel)]="model.owner">
+      <input type="text" id="owner" name="owner" [(ngModel)]="model.owner" #owner="ngModel"
+        [ngClass]="{'error': form.submitted && owner.errors}" required>
+      <div class="error" *ngIf="form.submitted">
+        <small *ngIf="owner.errors?.required">Owner 必填</small>
+      </div>
     </div>
+    <ng-container *ngTemplateOutlet="common; context: { $implicit: 'assets/excel/demo-mssql.xls' }"></ng-container>
   </form>
 </ng-template>
 
 <ng-template #mysql>
-  <form #form>
+  <form #form="ngForm">
     <div class="row">
       <label for="characterSet" class="required">Character Set</label>
-      <input type="text" id="characterSet" name="characterSet" [(ngModel)]="model.characterSet">
+      <input type="text" id="characterSet" name="characterSet" [(ngModel)]="model.characterSet" #characterSet="ngModel"
+        [ngClass]="{'error': form.submitted && characterSet.errors}" required>
+      <div class="error" *ngIf="form.submitted">
+        <small *ngIf="characterSet.errors?.required">Character Set 必填</small>
+      </div>
     </div>
     <div class="row">
       <label for="collate" class="required">Collate</label>
-      <input type="text" id="collate" name="collate" [(ngModel)]="model.collate">
+      <input type="text" id="collate" name="collate" [(ngModel)]="model.collate" #collate="ngModel"
+        [ngClass]="{'error': form.submitted && collate.errors}" required>
+      <div class="error" *ngIf="form.submitted">
+        <small *ngIf="collate.errors?.required">Collate 必填</small>
+      </div>
     </div>
-    <div class="row">
-      <label for="file" class="required">File</label>
-      <a mat-button color="primary" [href]="url" target="_blank">範例下載</a>
-      <input type="text" id="fileName" name="fileName" [(ngModel)]="fileName">
-    </div>
-    <div class="row">
-      <button mat-flat-button color="primary" (click)="excel2Sql();">轉成 SQL</button>
-    </div>
+    <ng-container *ngTemplateOutlet="common; context: { $implicit: 'assets/excel/demo-mysql.xls' }"></ng-container>
   </form>
+</ng-template>
+
+<ng-template #common let-url>
+  <div class="row">
+    <label for="file" class="required">檔案</label>
+    <input type="file" accept=".xls, .xlsx" class="hide" id="file" name="file" #file (change)="handleFile();">
+    <button type="button" mat-button color="primary" (click)="file.click();">選擇檔案</button>
+    <input type="text" disabled [(ngModel)]="fileName" [ngModelOptions]="{standalone: true}">
+  </div>
+  <div class="row">
+    <button type="submit" mat-flat-button color="primary" (click)="excel2Sql();">轉成 SQL</button>
+    <a mat-button color="primary" [href]="url" target="_blank">範例下載</a>
+  </div>
 </ng-template>

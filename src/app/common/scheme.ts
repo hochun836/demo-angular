@@ -5,18 +5,8 @@ export enum DbType {
   Mssql = 'mssql',
   Mysql = 'mysql',
 }
-export interface ExcelRow {
-  TableId,
-  TableName,
-  PrimaryKey,
-  ColumnId,
-  ColumnName,
-  DataType,
-  Nullable,
-  DefaultValue,
-  AutoIncrement,
-  Unique,
-  Comment,
-  ReferenceTableId,
-  ReferenceColumnId,
-}
+
+// Array Of Array
+export type AOA = Array<Array<any>>;
+
+

@@ -1,5 +1,16 @@
 @import 'src/scss/shared';
 
+%field {
+
+  &.error {
+    border: 2px solid $warn-color;
+  }
+
+  &+.error small {
+    color: $warn-color;
+  }
+}
+
 html,
 body {
   height: 100%;
@@ -29,6 +40,20 @@ a.link {
   }
 }
 
+input[type=text],
+textarea {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border: 1px solid $gray-color;
+
+  &:enabled:focus {
+    outline: 0 none;
+    outline-offset: 0;
+    border: 2px solid $primary-color;
+  }
+}
+
 mat-icon.fa {
   font-size: 1.7rem;
 }
@@ -39,6 +64,10 @@ mat-icon.fa {
 
 .hide {
   display: none;
+}
+
+.hint {
+  color: $gray-color;
 }
 
 .row {
@@ -54,7 +83,6 @@ mat-icon.fa {
   }
 
   input[type=text] {
-    width: 100%;
-    padding: 0.5rem 1rem;
+    @extend %field;
   }
 }

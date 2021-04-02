@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { DbType } from 'src/app/common/scheme';
-
+import { AOA, DbType } from 'src/app/common/scheme';
+import { createSql } from 'src/app/util/sql-util';
+import * as XLSX from 'xlsx';
 @Component({
   selector: 'app-func0020',
   templateUrl: './func0020.component.html',
@@ -10,21 +11,44 @@ import { DbType } from 'src/app/common/scheme';
 export class Func0020Component implements OnInit {
 
   @ViewChild('form', { static: false }) form: NgForm;
-  @ViewChild('file', { static: false }) fileRef: HTMLInputElement;
+  @ViewChild('file', { static: false }) fileRef: ElementRef<HTMLInputElement>;
 
   template: any;
   dbType: DbType;
   sql: string;
   model = {} as any;
+  file: File;
+  fileName: string;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  handleChange(): void {
+  handleFile(): void {
+    const files = this.fileRef.nativeElement.files;
+    if (files.length === 0) {
+      this.file = undefined;
+      this.fileName = '';
+      return;
+    }
+    this.file = files[0];
+    this.fileName = files[0].name;
   }
 
   excel2Sql(): void {
+    if (this.form.invalid) {
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = (evt: ProgressEvent<FileReader>) => {
+      const workbook: XLSX.WorkBook = XLSX.read(evt.target.result, { type: 'binary' });
+      const sheetName: string = workbook.SheetNames[0];
+      const sheet: XLSX.WorkSheet = workbook.Sheets[sheetName];
+      const totalList: AOA = XLSX.utils.sheet_to_json(sheet, { header: 1 }); // header: 1 is important!
+      const rowList = totalList.slice(1);
+      this.sql = createSql(rowList, this.dbType);
+    };
+    reader.readAsBinaryString(this.file);
   }
 }

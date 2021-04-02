@@ -82,3 +82,19 @@ export function isValidIndex(array: any[], index: number): boolean {
 export function isInvalidIndex(array: any[], index: number): boolean {
   return !isValidIndex(array, index);
 }
+
+/**
+ * StringBuilder
+ */
+export class StringBuilder {
+
+  private list = [] as string[];
+
+  append(str: string): void {
+    this.list.push(str);
+  }
+
+  toString(): string {
+    return this.list.join(' ');
+  }
+}
