@@ -42,19 +42,35 @@
 <ng-template #mysql>
   <form #form="ngForm">
     <div class="row">
-      <label for="characterSet" class="required">Character Set</label>
-      <input type="text" id="characterSet" name="characterSet" [(ngModel)]="model.characterSet" #characterSet="ngModel"
-        [ngClass]="{'error': form.submitted && characterSet.errors}" required>
+      <label for="engine" class="required">ENGINE</label>
+      <input type="text" id="engine" name="engine" [(ngModel)]="model.engine" #engine="ngModel"
+        [ngClass]="{'error': form.submitted && engine.errors}" required>
       <div class="error" *ngIf="form.submitted">
-        <small *ngIf="characterSet.errors?.required">Character Set 必填</small>
+        <small *ngIf="engine.errors?.required">ENGINE 必填</small>
       </div>
     </div>
     <div class="row">
-      <label for="collate" class="required">Collate</label>
+      <label for="characterSet" class="required">CHARACTER SET</label>
+      <input type="text" id="characterSet" name="characterSet" [(ngModel)]="model.characterSet" #characterSet="ngModel"
+        [ngClass]="{'error': form.submitted && characterSet.errors}" required>
+      <div class="error" *ngIf="form.submitted">
+        <small *ngIf="characterSet.errors?.required">CHARACTER SET 必填</small>
+      </div>
+    </div>
+    <div class="row">
+      <label for="collate" class="required">COLLATE</label>
       <input type="text" id="collate" name="collate" [(ngModel)]="model.collate" #collate="ngModel"
         [ngClass]="{'error': form.submitted && collate.errors}" required>
       <div class="error" *ngIf="form.submitted">
-        <small *ngIf="collate.errors?.required">Collate 必填</small>
+        <small *ngIf="collate.errors?.required">COLLATE 必填</small>
+      </div>
+    </div>
+    <div class="row">
+      <label for="rowFormat" class="required">ROW_FORMAT</label>
+      <input type="text" id="rowFormat" name="rowFormat" [(ngModel)]="model.rowFormat" #rowFormat="ngModel"
+        [ngClass]="{'error': form.submitted && rowFormat.errors}" required>
+      <div class="error" *ngIf="form.submitted">
+        <small *ngIf="rowFormat.errors?.required">ROW_FORMAT 必填</small>
       </div>
     </div>
     <ng-container *ngTemplateOutlet="common; context: { $implicit: 'assets/excel/demo-mysql.xls' }"></ng-container>

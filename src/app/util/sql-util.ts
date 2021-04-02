@@ -1,6 +1,6 @@
 import { CHANGE_LINE } from '../common/constant';
 import { AOA, DbType } from '../common/scheme';
-import { isNotEmpty, StringBuilder } from './util';
+import { isNotEmpty, removeByIndex, StringBuilder } from './util';
 
 enum Column {
   TableId,
@@ -21,17 +21,20 @@ enum MysqlColumn {
   Comment,
   ReferenceTableId,
   ReferenceColumnId,
+  OnDelete,
+  OnUpdate,
 }
 
-export function createSql(rowList: AOA, dbType: DbType): string {
+export function createSql(rowList: AOA, dbType: DbType, model: any): string {
 
   const sb = new StringBuilder();
 
   const startRow = 0;
   const endRow = rowList.length - 1;
+
   let currTableStartRow = startRow;
   let currTableEndRow = startRow;
-  let nextTableStartRow = startRow;
+  let tempTableStartRow = startRow;
   let currTableId: string;
   let nextTableId: string;
 
@@ -41,29 +44,38 @@ export function createSql(rowList: AOA, dbType: DbType): string {
     nextTableId = i == endRow ? '' : rowList[i + 1][Column.TableId];
 
     if (currTableId !== nextTableId) {
-      currTableStartRow = nextTableStartRow;
+      currTableStartRow = tempTableStartRow;
       currTableEndRow = i;
-      nextTableStartRow = i + 1;
+      tempTableStartRow = i + 1;
       const subRowList = rowList.slice(currTableStartRow, currTableEndRow);
-      sb.append(createOneTableSql(subRowList, dbType));
+      const sql = createOneTableSql(subRowList, dbType, model);
+      sb.append(sql + CHANGE_LINE);
     }
   });
 
   return sb.toString();
 }
 
-function createOneTableSql(rowList: AOA, dbType: DbType): string {
+function createOneTableSql(rowList: AOA, dbType: DbType, model: any): string {
   switch (dbType) {
     case DbType.Oracle:
-      return "";
+      return create4Oracle(rowList, model);
     case DbType.Mssql:
-      return "";
+      return create4Mssql(rowList, model);
     case DbType.Mysql:
-      return create4Mysql(rowList);
+      return create4Mysql(rowList, model);
   }
 }
 
-function create4Mysql(rowList: AOA): string {
+function create4Oracle(rowList: AOA, model: any): string {
+  return '';
+}
+
+function create4Mssql(rowList: AOA, model: any): string {
+  return '';
+}
+
+function create4Mysql(rowList: AOA, model: any): string {
 
   const sb = new StringBuilder();
 
@@ -72,16 +84,17 @@ function create4Mysql(rowList: AOA): string {
   const tableId = rowList[startRow][MysqlColumn.TableId];
   const tableName = rowList[startRow][MysqlColumn.TableName];
 
-  sb.append(`--------------------------------------------------------------${CHANGE_LINE}`);
-  sb.append(`-------------- DDL for ${tableId} ( ${tableName} ) ${CHANGE_LINE}`);
-  sb.append(`--------------------------------------------------------------${CHANGE_LINE}`);
+  sb.append(`-- ------------------------------------------------------------` + CHANGE_LINE);
+  sb.append(`-- ------------ DDL for ${tableId} (${tableName})` + CHANGE_LINE);
+  sb.append(`-- ------------------------------------------------------------` + CHANGE_LINE);
 
   // Table
-  sb.append(`DROP TABLE IF EXISTS \`${tableId}\`;${CHANGE_LINE}`);
+  sb.append(`DROP TABLE IF EXISTS \`${tableId}\`;` + CHANGE_LINE);
 
-  sb.append(`CREATE TABLE \`${tableId}\` (${CHANGE_LINE}`);
+  sb.append(`CREATE TABLE \`${tableId}\` (` + CHANGE_LINE);
 
-  rowList.forEach((row, i) => {
+  // Column
+  rowList.forEach(row => {
 
     const columnId = row[MysqlColumn.ColumnId];
     const columnName = row[MysqlColumn.ColumnName];
@@ -89,7 +102,6 @@ function create4Mysql(rowList: AOA): string {
     const nullable = row[MysqlColumn.Nullable];
     const defaultValue = row[MysqlColumn.DefaultValue];
     const autoIncrement = row[MysqlColumn.AutoIncrement];
-    const unique = row[MysqlColumn.Unique];
     const comment = row[MysqlColumn.Comment];
 
     const sql = new StringBuilder();
@@ -97,32 +109,55 @@ function create4Mysql(rowList: AOA): string {
     sql.append(`\`${columnId}\` ${dataType}`);
 
     if (nullable === 'Y') {
-      sql.append(" NULL");
+      sql.append('NULL');
     } else {
-      sql.append(" NOT NULL");
+      sql.append('NOT NULL');
     }
 
     if (isNotEmpty(defaultValue)) {
-      sql.append(` DEFAULT ${defaultValue}`);
+      sql.append(`DEFAULT ${defaultValue}`);
     }
 
     if (autoIncrement === 'Y') {
-      sql.append(" AUTO_INCREMENT");
+      sql.append('AUTO_INCREMENT');
     }
 
     if (isNotEmpty(comment)) {
-      sql.append(` COMMENT ${columnName}[${comment}]`);
+      sql.append(`COMMENT '${columnName}[${comment}]'`);
+    } else {
+      sql.append(`COMMENT '${columnName}'`);
     }
 
-    if (i != endRow) {
-      sql.append(",");
-    }
+    sql.append(',');
 
     sb.append(sql.toString() + CHANGE_LINE);
   });
 
-  sb.append(") ENGINE = InnoDB AUTO_INCREMENT = 261 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Compact;" + CHANGE_LINE);
+  // Primary Key
+  const pkColumnIds = rowList
+    .filter(row => isNotEmpty(row[MysqlColumn.PrimaryKey]))
+    .map(row => `\`${row[MysqlColumn.ColumnId]}\``)
+    .join(',');
 
-  return sb.toString();
+  if (isNotEmpty(pkColumnIds)) {
+    sb.append(`PRIMARY KEY (${pkColumnIds}) USING BTREE,` + CHANGE_LINE);
+  }
+
+  // Unique
+  rowList
+    .filter(row => isNotEmpty(row[MysqlColumn.Unique]))
+    .map(row => `UNIQUE (\`${row[MysqlColumn.ColumnId]}\`),` + CHANGE_LINE)
+    .forEach(sql => sb.append(sql));
+
+  // Foreign Key
+  rowList
+    .filter(row => isNotEmpty(row[MysqlColumn.ReferenceTableId]))
+    .map(row => `CONSTRAINT \`${row[MysqlColumn.TableId]}_${row[MysqlColumn.ColumnId]}\` FOREIGN KEY (\`${row[MysqlColumn.ColumnId]}\`) REFERENCES \`${row[MysqlColumn.ReferenceTableId]}\` (\`${row[MysqlColumn.ReferenceColumnId]}\`) ON DELETE ${row[MysqlColumn.OnDelete]} ON UPDATE ${row[MysqlColumn.OnUpdate]},` + CHANGE_LINE)
+    .forEach(sql => sb.append(sql));
+
+  sb.append(`) ENGINE = ${model.engine} CHARACTER SET = ${model.characterSet} COLLATE = ${model.collate} ROW_FORMAT = ${model.rowFormat};` + CHANGE_LINE);
+
+  const result = sb.toString();
+  return removeByIndex(result, result.lastIndexOf(','));
 }
 

@@ -47,7 +47,7 @@ export class Func0020Component implements OnInit {
       const sheet: XLSX.WorkSheet = workbook.Sheets[sheetName];
       const totalList: AOA = XLSX.utils.sheet_to_json(sheet, { header: 1 }); // header: 1 is important!
       const rowList = totalList.slice(1);
-      this.sql = createSql(rowList, this.dbType);
+      this.sql = createSql(rowList, this.dbType, this.model);
     };
     reader.readAsBinaryString(this.file);
   }

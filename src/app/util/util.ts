@@ -84,6 +84,13 @@ export function isInvalidIndex(array: any[], index: number): boolean {
 }
 
 /**
+ * remove a character at a certain position in a string
+ */
+export function removeByIndex(str: string, index: number): string {
+  return str.slice(0, index) + str.slice(index + 1);
+}
+
+/**
  * StringBuilder
  */
 export class StringBuilder {
