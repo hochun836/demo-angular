@@ -2,29 +2,6 @@ import { CHANGE_LINE } from '../common/constant';
 import { AOA, DbType } from '../common/scheme';
 import { isNotEmpty, removeByIndex, StringBuilder } from './util';
 
-enum Column {
-  TableId,
-  TableName,
-}
-
-enum MysqlColumn {
-  TableId,
-  TableName,
-  PrimaryKey,
-  ColumnId,
-  ColumnName,
-  DataType,
-  Nullable,
-  DefaultValue,
-  AutoIncrement,
-  Unique,
-  Comment,
-  ReferenceTableId,
-  ReferenceColumnId,
-  OnDelete,
-  OnUpdate,
-}
-
 export function createSql(rowList: AOA, dbType: DbType, model: any): string {
 
   const sb = new StringBuilder();
@@ -72,7 +49,114 @@ function create4Oracle(rowList: AOA, model: any): string {
 }
 
 function create4Mssql(rowList: AOA, model: any): string {
-  return '';
+
+  const sb = new StringBuilder();
+
+  const startRow = 0;
+  const endRow = rowList.length - 1;
+  const tableId = rowList[startRow][MysqlColumn.TableId];
+  const tableName = rowList[startRow][MysqlColumn.TableName];
+
+  const owner = model.owner;
+
+  sb.append(`--------------------------------------------------------------` + CHANGE_LINE);
+  sb.append(`-------------- DDL for ${tableId} (${tableName})` + CHANGE_LINE);
+  sb.append(`--------------------------------------------------------------` + CHANGE_LINE);
+
+  // Table
+  sb.append('SET ANSI_NULLS ON' + CHANGE_LINE);
+  sb.append('GO' + CHANGE_LINE);
+
+  sb.append('SET QUOTED_IDENTIFIER ON' + CHANGE_LINE);
+  sb.append('GO' + CHANGE_LINE);
+
+  sb.append('SET ANSI_PADDING OFF' + CHANGE_LINE);
+  sb.append('GO' + CHANGE_LINE);
+
+  sb.append(`DROP TABLE [${owner}].[${tableId}]` + CHANGE_LINE);
+  sb.append('GO' + CHANGE_LINE);
+
+  sb.append(`CREATE TABLE [${owner}].[${tableId}]` + CHANGE_LINE);
+  sb.append('(' + CHANGE_LINE);
+
+  // Column
+  rowList.forEach((row, i) => {
+
+    const columnId = row[MssqlColumn.ColumnId];
+    const dataType = row[MssqlColumn.DataType];
+    const nullable = row[MssqlColumn.Nullable];
+    const defaultValue = row[MssqlColumn.DefaultValue];
+    const autoIncrement = row[MssqlColumn.AutoIncrement];
+    const unique = row[MssqlColumn.Unique];
+
+    const sql = new StringBuilder();
+
+    sql.append(`[${columnId}] ${dataType}`);
+
+    if (nullable === 'Y') {
+      sql.append('NULL');
+    } else {
+      sql.append('NOT NULL');
+    }
+
+    if (isNotEmpty(defaultValue)) {
+      const value = dataType.toUpperCase().startsWith('VARCHAR') || dataType.toUpperCase().startsWith('NVARCHAR') ? `'${defaultValue}'` : defaultValue;
+      sql.append(`DEFAULT ${value}`);
+    }
+
+    if (autoIncrement === 'Y') {
+      sql.append('IDENTITY(1,1)');
+    }
+
+    if (unique === 'Y') {
+      sql.append('UNIQUE');
+    }
+
+    if (i !== rowList.length - 1) {
+      sql.append(',');
+    }
+
+    sb.append(sql.toString() + CHANGE_LINE);
+  });
+
+  // Primary Key
+  const pkColumnIds = rowList
+    .filter(row => isNotEmpty(row[MssqlColumn.PrimaryKey]))
+    .map(row => row[MssqlColumn.ColumnId])
+    .join(',');
+
+  if (isNotEmpty(pkColumnIds)) {
+    sb.append(`,CONSTRAINT [IX_${tableId}] PRIMARY KEY CLUSTERED (${pkColumnIds}) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]` + CHANGE_LINE);
+  }
+
+  sb.append(') ON [PRIMARY]' + CHANGE_LINE);
+  sb.append('GO' + CHANGE_LINE);
+
+  sb.append('SET ANSI_PADDING OFF' + CHANGE_LINE);
+  sb.append('GO' + CHANGE_LINE);
+
+  // Foreign Key
+  rowList
+    .filter(row => isNotEmpty(row[MssqlColumn.ReferenceTableId]))
+    .map(row => `ALTER TABLE [${owner}].[${tableId}] WITH CHECK ADD CONSTRAINT [FK_${tableId}_${row[MssqlColumn.ReferenceTableId]}] FOREIGN KEY(${row[MssqlColumn.ColumnId]}) REFERENCES [${owner}].[${row[MssqlColumn.ReferenceTableId]}] (${row[MssqlColumn.ReferenceColumnId]})` + CHANGE_LINE)
+    .forEach(sql => {
+      sb.append(sql);
+      sb.append('GO' + CHANGE_LINE);
+    });
+
+  // Comment Table
+  sb.append(`EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'${tableName}', @level0type=N'SCHEMA', @level0name=N'${owner}', @level1type=N'TABLE', @level1name=N'${tableId}'` + CHANGE_LINE);
+  sb.append('GO' + CHANGE_LINE);
+
+  // Comment Column
+  rowList
+    .forEach(row => {
+      const desc = isNotEmpty(row[MssqlColumn.Comment]) ? `${row[MssqlColumn.ColumnName]}[${row[MssqlColumn.Comment]}]` : row[MssqlColumn.ColumnName];
+      sb.append(`EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'${desc}', @level0type=N'SCHEMA', @level0name=N'${owner}', @level1type=N'TABLE', @level1name=N'${tableId}', @level2type=N'COLUMN', @level2name=N'${row[MssqlColumn.ColumnId]}'` + CHANGE_LINE);
+      sb.append('GO' + CHANGE_LINE);
+    });
+
+  return sb.toString();
 }
 
 function create4Mysql(rowList: AOA, model: any): string {
@@ -161,3 +245,41 @@ function create4Mysql(rowList: AOA, model: any): string {
   return removeByIndex(result, result.lastIndexOf(','));
 }
 
+enum Column {
+  TableId,
+  TableName,
+}
+
+enum MssqlColumn {
+  TableId,
+  TableName,
+  PrimaryKey,
+  ColumnId,
+  ColumnName,
+  DataType,
+  Nullable,
+  DefaultValue,
+  AutoIncrement,
+  Unique,
+  Comment,
+  ReferenceTableId,
+  ReferenceColumnId,
+}
+
+enum MysqlColumn {
+  TableId,
+  TableName,
+  PrimaryKey,
+  ColumnId,
+  ColumnName,
+  DataType,
+  Nullable,
+  DefaultValue,
+  AutoIncrement,
+  Unique,
+  Comment,
+  ReferenceTableId,
+  ReferenceColumnId,
+  OnDelete,
+  OnUpdate,
+}
