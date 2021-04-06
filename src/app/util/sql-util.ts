@@ -18,13 +18,13 @@ export function createSql(rowList: AOA, dbType: DbType, model: any): string {
   rowList.forEach((row, i) => {
 
     currTableId = row[Column.TableId];
-    nextTableId = i == endRow ? '' : rowList[i + 1][Column.TableId];
+    nextTableId = i === endRow ? '' : rowList[i + 1][Column.TableId];
 
     if (currTableId !== nextTableId) {
       currTableStartRow = tempTableStartRow;
       currTableEndRow = i;
       tempTableStartRow = i + 1;
-      const subRowList = rowList.slice(currTableStartRow, currTableEndRow);
+      const subRowList = rowList.slice(currTableStartRow, currTableEndRow + 1);
       const sql = createOneTableSql(subRowList, dbType, model);
       sb.append(sql + CHANGE_LINE);
     }
