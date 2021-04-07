@@ -23,6 +23,17 @@
 </ng-template>
 
 <ng-template #oracle>
+  <form #form="ngForm">
+    <div class="row">
+      <label for="username" class="required">Username</label>
+      <input type="text" id="username" name="username" [(ngModel)]="model.username" #username="ngModel"
+        [ngClass]="{'error': form.submitted && username.errors}" required>
+      <div class="error" *ngIf="form.submitted">
+        <small *ngIf="username.errors?.required">Username 必填</small>
+      </div>
+    </div>
+    <ng-container *ngTemplateOutlet="common; context: { $implicit: 'assets/excel/demo-oracle.xls' }"></ng-container>
+  </form>
 </ng-template>
 
 <ng-template #mssql>
