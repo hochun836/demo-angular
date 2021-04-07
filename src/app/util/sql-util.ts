@@ -45,7 +45,90 @@ function createOneTableSql(rowList: AOA, dbType: DbType, model: any): string {
 }
 
 function create4Oracle(rowList: AOA, model: any): string {
-  return '';
+
+  const sb = new StringBuilder();
+
+  const startRow = 0;
+  const endRow = rowList.length - 1;
+  const tableId = rowList[startRow][OracleColumn.TableId];
+  const tableName = rowList[startRow][OracleColumn.TableName];
+
+  const username = model.username;
+
+  sb.append(`--------------------------------------------------------------` + CHANGE_LINE);
+  sb.append(`-------------- DDL for ${tableId} (${tableName})` + CHANGE_LINE);
+  sb.append(`--------------------------------------------------------------` + CHANGE_LINE);
+
+  // Table
+  sb.append(`DROP TABLE "${username}"."${tableId}";` + CHANGE_LINE);
+
+  sb.append(`CREATE TABLE "${username}"."${tableId}"` + CHANGE_LINE);
+  sb.append('(' + CHANGE_LINE);
+
+  // Column
+  rowList.forEach((row, i) => {
+
+    const columnId = row[OracleColumn.ColumnId];
+    const dataType = row[OracleColumn.DataType];
+    const nullable = row[OracleColumn.Nullable];
+    const defaultValue = row[OracleColumn.DefaultValue];
+    const unique = row[OracleColumn.Unique];
+
+    const sql = new StringBuilder();
+
+    sql.append(`"${columnId}" ${dataType}`);
+
+    if (nullable === 'Y') {
+      sql.append('NULL');
+    } else {
+      sql.append('NOT NULL');
+    }
+
+    if (isNotEmpty(defaultValue)) {
+      const value = dataType.toUpperCase().startsWith('VARCHAR2') || dataType.toUpperCase().startsWith('NVARCHAR2') ? `'${defaultValue}'` : defaultValue;
+      sql.append(`DEFAULT ${value}`);
+    }
+
+    if (unique === 'Y') {
+      sql.append('UNIQUE');
+    }
+
+    if (i !== rowList.length - 1) {
+      sql.append(',');
+    }
+
+    sb.append(sql.toString() + CHANGE_LINE);
+  });
+
+  sb.append(');' + CHANGE_LINE);
+
+  // Primary Key
+  const pkColumnIds = rowList
+    .filter(row => isNotEmpty(row[OracleColumn.PrimaryKey]))
+    .map(row => `"${row[OracleColumn.ColumnId]}"`)
+    .join(',');
+
+  if (isNotEmpty(pkColumnIds)) {
+    sb.append(`ALTER TABLE "${username}"."${tableId}" ADD CONSTRAINT "IX_${tableId}" PRIMARY KEY (${pkColumnIds});` + CHANGE_LINE);
+  }
+
+  // Foreign Key
+  rowList
+    .filter(row => isNotEmpty(row[OracleColumn.ReferenceTableId]))
+    .map(row => `ALTER TABLE "${username}"."${tableId}" ADD CONSTRAINT "FK_${tableId}" FOREIGN KEY("${row[OracleColumn.ColumnId]}") REFERENCES "${username}"."${row[OracleColumn.ReferenceTableId]}" ("${row[OracleColumn.ReferenceColumnId]}");` + CHANGE_LINE)
+    .forEach(sql => sb.append(sql));
+
+  // Comment Table
+  sb.append(`COMMENT ON TABLE "${username}"."${tableId}" IS '${tableName}';` + CHANGE_LINE);
+
+  // Comment Column
+  rowList
+    .forEach(row => {
+      const desc = isNotEmpty(row[OracleColumn.Comment]) ? `${row[OracleColumn.ColumnName]}[${row[OracleColumn.Comment]}]` : row[OracleColumn.ColumnName];
+      sb.append(`COMMENT ON COLUMN "${username}"."${tableId}"."${row[OracleColumn.ColumnId]}" IS '${desc.substring(0, 30)}';` + CHANGE_LINE);
+    });
+
+  return sb.toString();
 }
 
 function create4Mssql(rowList: AOA, model: any): string {
@@ -54,8 +137,8 @@ function create4Mssql(rowList: AOA, model: any): string {
 
   const startRow = 0;
   const endRow = rowList.length - 1;
-  const tableId = rowList[startRow][MysqlColumn.TableId];
-  const tableName = rowList[startRow][MysqlColumn.TableName];
+  const tableId = rowList[startRow][MssqlColumn.TableId];
+  const tableName = rowList[startRow][MssqlColumn.TableName];
 
   const owner = model.owner;
 
@@ -248,6 +331,21 @@ function create4Mysql(rowList: AOA, model: any): string {
 enum Column {
   TableId,
   TableName,
+}
+
+enum OracleColumn {
+  TableId,
+  TableName,
+  PrimaryKey,
+  ColumnId,
+  ColumnName,
+  DataType,
+  Nullable,
+  DefaultValue,
+  Unique,
+  Comment,
+  ReferenceTableId,
+  ReferenceColumnId,
 }
 
 enum MssqlColumn {
