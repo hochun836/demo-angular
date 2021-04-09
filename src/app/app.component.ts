@@ -24,12 +24,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     const url1 = this.domSanitizer.bypassSecurityTrustResourceUrl('assets/image/angular.svg');
-    const url2 = this.domSanitizer.bypassSecurityTrustResourceUrl('assets/image/light-dark.svg');
     this.matIconRegistry.addSvgIconInNamespace('custom-svg', 'angular', url1);
-    this.matIconRegistry.addSvgIconInNamespace('custom-svg', 'light-dark', url2);
     this.matIconRegistry.registerFontClassAlias('fontawesome', 'fa');
-    this.zone.onUnstable.subscribe(() => { console.log('##### 事件 - 發生') });
-    this.zone.onStable.subscribe(() => { console.log('##### 事件 - 結束') });
+    this.zone.onUnstable.subscribe(() => console.log('##### 事件 - 發生'));
+    this.zone.onStable.subscribe(() => console.log('##### 事件 - 結束'));
 
     let theme = this.storage.getItem('theme');
     theme = theme === 'dark-theme' ? 'dark-theme' : 'light-theme';

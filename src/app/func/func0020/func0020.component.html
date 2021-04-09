@@ -1,15 +1,15 @@
-<div>
+<div class="radio-group">
   <span>資料庫:</span>
-  <input type="radio" id="oracle" name="oracle" value="oracle" [(ngModel)]="dbType" (click)="template = oracle">
+  <input type="radio" id="oracle" name="oracle" value="oracle" [(ngModel)]="dbType" (click)="template = oracleTemplate">
   <label for="oracle">Oracle</label>
-  <input type="radio" id="mssql" name="mssql" value="mssql" [(ngModel)]="dbType" (click)="template = mssql">
+  <input type="radio" id="mssql" name="mssql" value="mssql" [(ngModel)]="dbType" (click)="template = mssqlTemplate">
   <label for="mssql">Mssql</label>
-  <input type="radio" id="mysql" name="mysql" value="mysql" [(ngModel)]="dbType" (click)="template = mysql">
+  <input type="radio" id="mysql" name="mysql" value="mysql" [(ngModel)]="dbType" (click)="template = mysqlTemplate">
   <label for="mysql">Mysql</label>
 </div>
 
 <div class="option">
-  <ng-container *ngTemplateOutlet="template ? template : default"></ng-container>
+  <ng-container *ngTemplateOutlet="template ? template : defaultTemplate"></ng-container>
 </div>
 
 <textarea readonly [(ngModel)]="sql"></textarea>
@@ -18,39 +18,41 @@
 
 <!-- Template -->
 
-<ng-template #default>
+<ng-template #defaultTemplate>
   <div class="hint">請選擇資料庫</div>
 </ng-template>
 
-<ng-template #oracle>
+<ng-template #oracleTemplate>
   <form #form="ngForm">
     <div class="row">
-      <label for="username" class="required">Username</label>
+      <label for="username" class="required">USERNAME</label>
       <input type="text" id="username" name="username" [(ngModel)]="model.username" #username="ngModel"
         [ngClass]="{'error': form.submitted && username.errors}" required>
       <div class="error" *ngIf="form.submitted">
-        <small *ngIf="username.errors?.required">Username 必填</small>
+        <small *ngIf="username.errors?.required">USERNAME 必填</small>
       </div>
     </div>
-    <ng-container *ngTemplateOutlet="common; context: { $implicit: 'assets/excel/demo-oracle.xls' }"></ng-container>
+    <ng-container *ngTemplateOutlet="commonTemplate; context: { $implicit: 'assets/excel/demo-oracle.xls' }">
+    </ng-container>
   </form>
 </ng-template>
 
-<ng-template #mssql>
+<ng-template #mssqlTemplate>
   <form #form="ngForm">
     <div class="row">
-      <label for="owner" class="required">Owner</label>
+      <label for="owner" class="required">OWNER</label>
       <input type="text" id="owner" name="owner" [(ngModel)]="model.owner" #owner="ngModel"
         [ngClass]="{'error': form.submitted && owner.errors}" required>
       <div class="error" *ngIf="form.submitted">
-        <small *ngIf="owner.errors?.required">Owner 必填</small>
+        <small *ngIf="owner.errors?.required">OWNER 必填</small>
       </div>
     </div>
-    <ng-container *ngTemplateOutlet="common; context: { $implicit: 'assets/excel/demo-mssql.xls' }"></ng-container>
+    <ng-container *ngTemplateOutlet="commonTemplate; context: { $implicit: 'assets/excel/demo-mssql.xls' }">
+    </ng-container>
   </form>
 </ng-template>
 
-<ng-template #mysql>
+<ng-template #mysqlTemplate>
   <form #form="ngForm">
     <div class="row">
       <label for="engine" class="required">ENGINE</label>
@@ -84,11 +86,12 @@
         <small *ngIf="rowFormat.errors?.required">ROW_FORMAT 必填</small>
       </div>
     </div>
-    <ng-container *ngTemplateOutlet="common; context: { $implicit: 'assets/excel/demo-mysql.xls' }"></ng-container>
+    <ng-container *ngTemplateOutlet="commonTemplate; context: { $implicit: 'assets/excel/demo-mysql.xls' }">
+    </ng-container>
   </form>
 </ng-template>
 
-<ng-template #common let-url>
+<ng-template #commonTemplate let-url>
   <div class="row">
     <label for="file" class="required">檔案</label>
     <input type="file" accept=".xls, .xlsx" class="hide" id="file" name="file" #file (change)="handleFile();">
