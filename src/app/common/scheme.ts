@@ -9,4 +9,7 @@ export enum DbType {
 // Array Of Array
 export type AOA = Array<Array<any>>;
 
-
+export enum ChartType {
+  Chartjs = 'chartjs',
+  Highcharts = 'highcharts',
+}
