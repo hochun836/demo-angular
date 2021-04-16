@@ -9,9 +9,9 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "start-public": "ng serve --host=0.0.0.0",
-    "build-sit": "ng build --configuration=sit --outputPath=dist/sit --baseHref=/demo-angular/",
-    "build-uat": "ng build --configuration=uat --outputPath=dist/uat --baseHref=/demo-angular/",
-    "build-prd": "ng build --prod --outputPath=dist/prd --baseHref=/demo-angular/"
+    "build-sit": "ng build --configuration=sit --outputPath=dist/sit --baseHref=/demo-angular/ && copyfiles .htaccess dist/sit",
+    "build-uat": "ng build --configuration=uat --outputPath=dist/uat --baseHref=/demo-angular/ && copyfiles .htaccess dist/uat",
+    "build-prd": "ng build --prod --outputPath=dist/prd --baseHref=/demo-angular/ && copyfiles .htaccess dist/prd"
   },
   "private": true,
   "dependencies": {
@@ -56,6 +56,7 @@
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
+    "copyfiles": "^2.4.1",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~5.1.0",
