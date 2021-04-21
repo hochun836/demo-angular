@@ -34,7 +34,9 @@
               "src/scss/theme.scss",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "src/scripts/script.js"
+            ]
           },
           "configurations": {
             "sit": {
@@ -42,6 +44,10 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.sit.ts"
+                },
+                {
+                  "replace": "src/scripts/script.js",
+                  "with": "src/scripts/script.sit.js"
                 }
               ],
               "optimization": true,
@@ -69,6 +75,10 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.uat.ts"
+                },
+                {
+                  "replace": "src/scripts/script.js",
+                  "with": "src/scripts/script.uat.js"
                 }
               ],
               "optimization": true,
@@ -96,6 +106,10 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "src/scripts/script.js",
+                  "with": "src/scripts/script.prod.js"
                 }
               ],
               "optimization": true,
