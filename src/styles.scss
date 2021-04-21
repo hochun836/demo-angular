@@ -97,3 +97,12 @@ mat-icon.fa {
     @extend %field;
   }
 }
+
+.declaration {
+  font-size: 1.25rem;
+  font-style: italic;
+  font-weight: bold;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  color: $gray-color;
+}

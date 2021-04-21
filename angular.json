@@ -35,6 +35,7 @@
               "src/styles.scss"
             ],
             "scripts": [
+              "src/scripts/common.js",
               "src/scripts/script.js"
             ]
           },

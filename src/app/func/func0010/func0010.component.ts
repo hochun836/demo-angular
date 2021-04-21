@@ -22,7 +22,7 @@ export class Func0010Component implements OnInit {
     this.zone.runOutsideAngular(() => {
       const sortable = new Sortable(this.gridRef.nativeElement, {
         animation: 300,
-        easing: "cubic-bezier(1, 0, 0, 1)",
+        easing: 'cubic-bezier(1, 0, 0, 1)',
         onSort: this.execSort,
       });
     });

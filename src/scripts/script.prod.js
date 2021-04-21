@@ -1,3 +1,4 @@
+// Google Analytics
 window.dataLayer = window.dataLayer || [];
 
 function gtag() {
